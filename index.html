@@ -25,15 +25,12 @@
     <main>
         <div id="registro-usuario">
             <p>BIENVENIDO</p>
-            <label for="nombre">Ingrese su nombre</label>
-            
-            <input type="text" name="nombre" id="nombre">
-            <button onclick="window.location.href='./pages/cliente/cliente.html'">Ingresar </button>
+            <label for="nombre">Ingrese su nombre</label>       
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre de usuario">
+            <button class="btn-ingresar" onclick="ingresar()">Ingresar</button>
             <hr>
             <button onclick="window.location.href='./pages/admin/admin.html'">Ingresar como administrador</button>
-
         </div>
-
     </main>
 
     <!-- Importacion de archivo JS (Comportamiento) -->
