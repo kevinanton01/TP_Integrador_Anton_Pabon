@@ -1,0 +1,52 @@
+/* --- Estilos generales --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Estilos Header (encabezado) --- */
+header {
+    display: flex;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px #0000001a;
+}
+
+#icono-principal {
+    width: 50px;
+}
+
+.nombreAlumno {
+    color: black;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    padding-top: 11px;
+    margin-left: auto;
+}
+
+#titulo-principal {
+    color: black;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 7px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#listado-opciones {
+    display: flex;
+    align-items: center;
+    height: 55px;
+    padding-top: 11px;
+}
+
+a {
+    margin-left: 15px;
+    margin-right: 15px;
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+}
