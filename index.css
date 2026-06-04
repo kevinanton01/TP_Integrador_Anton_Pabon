@@ -50,3 +50,70 @@ a {
     color: black;
     font-size: 17px;
 }
+
+
+body main {
+    margin-top: 200px;
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    
+    
+    
+}
+
+
+
+#registro-usuario {
+    background-color: rgb(219, 216, 216);
+    padding: 30px;
+    width: 600px;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    
+    }
+
+
+
+
+
+#registro-usuario p {
+    
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+
+#registro-usuario label {
+    font-size: 14px;
+    color: black;
+}
+
+
+#registro-usuario input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px;
+    height: 50px;
+}
+
+
+#registro-usuario button{
+    padding: 12px;
+    background-color: rgb(84, 51, 235 );
+    color: white;
+    border: none;
+    border-radius: 8px;
+    
+    font-size: 18px;
+    font-weight: bold;
+    height: 50px;
+    
+}
+
