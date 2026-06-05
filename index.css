@@ -45,7 +45,7 @@ a {
 /* --- Estilos Main --- */
 
 body main {
-    margin-top: 200px;
+    margin-top: 180px;
     display: flex;
     justify-content: center; /* Centrado horizontal */   
 }
@@ -89,4 +89,27 @@ body main {
     font-size: 18px;
     font-weight: bold;
     height: 50px;
+}
+
+/* --- Estilos ingreso del administrador --- */
+
+#loginAdmin {
+    position: fixed;
+    background-color: rgb(219, 216, 216);
+    border-radius: 10px;
+    width: 540px;
+    height: 290px;
+}
+
+#loginAdmin input {
+    font-size: 18px;
+    margin-top: 20px;
+    display: flex;
+    width: 540px;
+}
+
+#loginAdmin button {
+    width: 267px;
+    gap: 10px;
+    margin-top: 20px;
 }
