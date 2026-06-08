@@ -41,3 +41,32 @@ a {
     color: black;
     font-size: 17px;
 }
+
+/*--Estilos Main--*/
+
+.h2-separador {
+    background-color: rgb(218, 214, 214);
+    padding: 10px;
+    color: black;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#listado-proteinas,
+#listado-creatinas,
+#listado-shackers {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    color: white;
+}
+
+.descripcion-producto {
+    max-width: 1000px;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 1rem;
+    color: #979494;
+}
