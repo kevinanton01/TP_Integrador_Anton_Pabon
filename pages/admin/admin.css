@@ -44,3 +44,13 @@ a {
     color: black;
     font-size: 17px;
 }
+
+/* --- Estilos footer --- */
+
+footer {
+    bottom: 0; /* lo pegamos al borde inferior */
+    left: 0;
+    width: 100%;
+    color: rgb(146, 146, 146);
+    font-size: 14px;
+}

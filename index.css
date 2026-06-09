@@ -47,7 +47,7 @@ a {
 body main {
     margin-top: 180px;
     display: flex;
-    justify-content: center; /* Centrado horizontal */   
+    justify-content: center; /* Centrado horizontal */  
 }
 
 #registro-usuario {
@@ -112,4 +112,14 @@ body main {
     width: 267px;
     gap: 10px;
     margin-top: 20px;
+}
+
+/* --- Estilos footer --- */
+
+footer {
+    bottom: 0; /* lo pegamos al borde inferior */
+    left: 0;
+    width: 100%;
+    color: rgb(146, 146, 146);
+    font-size: 14px;
 }
