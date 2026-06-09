@@ -8,10 +8,13 @@
 
 /* --- Estilos Header (encabezado) --- */
 header {
+    position: sticky; /* mantenerlo siempre fijo*/
+    top:0;
     display: flex;
     padding: 10px 20px;
     box-shadow: 0 2px 5px #0000001a;
     font-weight: bold;
+    background-color: white;
 }
 
 #icono-principal {
@@ -44,6 +47,10 @@ a {
 
 /*--Estilos Main--*/
 
+#proteinas, #creatinas, #shakers {
+    scroll-margin-top: 90px; /* Para que no los tape el header*/
+}
+
 .h2-separador {
     background-color: rgb(218, 214, 214);
     padding: 10px;
@@ -55,12 +62,13 @@ a {
 
 #listado-proteinas,
 #listado-creatinas,
-#listado-shackers {
+#listado-shakers {
     display: flex;
     justify-content: center;
     gap: 10px;
     padding: 20px;
     color: white;
+    flex-wrap: wrap;
 }
 
 .descripcion-producto {
@@ -89,7 +97,7 @@ a {
 
 #Proteinas,
 #Creatinas,
-#Shackers {
+#Shakers {
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
@@ -130,7 +138,7 @@ a {
 
 .boton-agregar:active,
 .boton-borrar:active {
-    background-color: rgb(148, 146, 146);
+    background-color: rgb(146, 146, 145);
 }
 
 .nombreBienvenida {

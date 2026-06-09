@@ -1,13 +1,13 @@
 let proteinas = [{ 'id': 1, 'nombre': 'Isoprot', 'precio': 126000, 'img': '../../img/Isoprot.webp' }, { 'id': 2, 'nombre': 'Ultra-mass', 'precio': 59400, 'img': '../../img/Ultra-mass.webp' }, { 'id': 3, 'nombre': 'Whey-x-pro', 'precio': 98000, 'img': '../../img/Whey-x-pro.webp' }, { 'id': 4, 'nombre': 'Starter-protein', 'precio': 42300, 'img': '../../img/Starter-protein.webp' }, { 'id': 5, 'nombre': 'Plant-protein', 'precio': 53000, 'img': '../../img/Plant-protein.webp' }];
 let creatinas = [{ 'id': 6, 'nombre': 'Creatina-monohidrato', 'precio': 45000, 'img': '../../img/Creatina-monohidrato.webp' }, { 'id': 7, 'nombre': 'Creatina-electrolitos', 'precio': 31200, 'img': '../../img/Creatina-electrolitos.webp' }, { 'id': 8, 'nombre': 'Creatina-monohidrato-1kilo', 'precio': 92000, 'img': '../../img/Creatina-monohidrato-1kilo.webp' }];
-let shackers = [{ 'id': 9, 'nombre': 'Shaker-ENA', 'precio': 6700, 'img': '../../img/Shaker-ENA.webp' }, { 'id': 10, 'nombre': 'Shaker-PLUS', 'precio': 7400, 'img': '../../img/Shaker-PLUS.webp' }, { 'id': 11, 'nombre': 'Shaker-premium-truemade', 'precio': 27000, 'img': '../../img/Shaker-premium-truemade.webp' }, { 'id': 12, 'nombre': 'Shaker-premium', 'precio': 27000, 'img': '../../img/Shaker-premium.webp' }];
+let shakers = [{ 'id': 9, 'nombre': 'Shaker-ENA', 'precio': 6700, 'img': '../../img/Shaker-ENA.webp' }, { 'id': 10, 'nombre': 'Shaker-PLUS', 'precio': 7400, 'img': '../../img/Shaker-PLUS.webp' }, { 'id': 11, 'nombre': 'Shaker-premium-truemade', 'precio': 27000, 'img': '../../img/Shaker-premium-truemade.webp' }, { 'id': 12, 'nombre': 'Shaker-premium', 'precio': 27000, 'img': '../../img/Shaker-premium.webp' }];
 
 
 let arrayCarrito = [];
 
 localStorage.setItem("proteinas", JSON.stringify(proteinas));
 localStorage.setItem("creatinas", JSON.stringify(creatinas));
-localStorage.setItem("shackers", JSON.stringify(shackers));
+localStorage.setItem("shakers", JSON.stringify(shakers));
 
 function insertarProductos(array, id) {
     const zona = document.getElementById(id);
@@ -29,7 +29,7 @@ function insertarProductos(array, id) {
 
 insertarProductos(proteinas, "listado-proteinas");
 insertarProductos(creatinas, "listado-creatinas");
-insertarProductos(shackers, "listado-shackers");
+insertarProductos(shakers, "listado-shakers");
 
 function crearEscuchadorBotonAgregar(texto) {
     let boton = document.getElementById(`boton-agregar-${texto}`);
@@ -44,7 +44,7 @@ function crearEscuchadorBotonAgregar(texto) {
                 arrayCarrito.push(structuredClone(creatina));
             }
         });
-        shackers.forEach(shacker => {
+        shakers.forEach(shacker => {
             if (shacker.nombre === texto) {
                 arrayCarrito.push(structuredClone(shacker));
             }
@@ -72,9 +72,9 @@ function crearEscuchadorBotonBorrar(texto) {
 
 }
 proteinas.forEach(proteina => crearEscuchadorBotonAgregar(proteina.nombre));
-shackers.forEach(shacker => crearEscuchadorBotonAgregar(shacker.nombre));
+shakers.forEach(shacker => crearEscuchadorBotonAgregar(shacker.nombre));
 creatinas.forEach(creatina => crearEscuchadorBotonAgregar(creatina.nombre));
 
 proteinas.forEach(proteina => crearEscuchadorBotonBorrar(proteina.nombre));
-shackers.forEach(shacker => crearEscuchadorBotonBorrar(shacker.nombre));
+shakers.forEach(shacker => crearEscuchadorBotonBorrar(shacker.nombre));
 creatinas.forEach(creatina => crearEscuchadorBotonBorrar(creatina.nombre));

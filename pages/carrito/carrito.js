@@ -1,5 +1,5 @@
 let arrayProteinas=JSON.parse(localStorage.getItem("proteinas"));
-let arrayShackers=JSON.parse(localStorage.getItem("shackers"));
+let arrayShakers=JSON.parse(localStorage.getItem("shakers"));
 let arrayCreatinas=JSON.parse(localStorage.getItem("creatinas"));
 //let arrayCarrito=[];
 //if(localStorage.getItem("Carrito")!==null){
@@ -18,7 +18,7 @@ function crearCarrito(){
             arrayCarritoUnico.push(creatina);
         }
     });
-    arrayShackers.forEach(shacker=>{
+    arrayShakers.forEach(shacker=>{
         if(arrayCarritoExtraido.some(producto=>producto.nombre===shacker.nombre)===true){
             arrayCarritoUnico.push(shacker);
         }
@@ -71,7 +71,7 @@ function crearEscuchadorBotonAgregar(texto){
                 arrayCarrito.push(structuredClone(creatina));
             }
         });
-        arrayShackers.forEach(shacker=>{
+        arrayShakers.forEach(shacker=>{
             if(shacker.nombre===texto){
                 arrayCarrito.push(structuredClone(shacker));
             }
@@ -121,7 +121,7 @@ function crearEscuchadorBotonBorrar(texto){
 }
 console.table(arrayCreatinas);
 console.table(arrayProteinas);
-console.table(arrayShackers);
+console.table(arrayShakers);
 crearCarrito();
 arrayCarritoUnico.forEach(producto=>crearEscuchadorBotonAgregar(producto.nombre));
 arrayCarritoUnico.forEach(producto=>crearEscuchadorBotonBorrar(producto.nombre));
