@@ -11,7 +11,18 @@ localStorage.setItem("shackers", JSON.stringify(shackers));
 
 function insertarProductos(array, id) {
     const zona = document.getElementById(id);
-    let arrayzona = array.map(producto => `<div class="productos"><div class="contenedor-imagen"><img src="${producto.img}" alt="${producto.nombre}" class="img-producto"></div><p class="nombre-producto">${producto.nombre}</p><p class="precio-producto">$${producto.precio}</p><div class="botones-productos"><button class="boton-agregar" id="boton-agregar-${producto.nombre}">+</button><button class="boton-borrar" id="boton-borrar-${producto.nombre}">-</button></div></div>`);
+    let arrayzona = array.map(producto => 
+        `<div class="productos">
+            <div class="contenedor-imagen">
+                <img src="${producto.img}" alt="${producto.nombre}" class="img-producto">
+            </div>
+            <p class="nombre-producto">${producto.nombre}</p>
+            <p class="precio-producto">$${producto.precio}</p>
+            <div class="botones-productos">
+                <button class="boton-agregar" id="boton-agregar-${producto.nombre}">+</button>
+                <button class="boton-borrar" id="boton-borrar-${producto.nombre}">-</button>
+            </div>
+        </div>`);
     const stringZona = arrayzona.join("");
     zona.innerHTML = stringZona;
 }
@@ -41,7 +52,6 @@ function crearEscuchadorBotonAgregar(texto) {
         let CarritoJSON = JSON.stringify(arrayCarrito);
         localStorage.setItem("Carrito", CarritoJSON);
     });
-
 }
 
 function crearEscuchadorBotonBorrar(texto) {
@@ -55,11 +65,8 @@ function crearEscuchadorBotonBorrar(texto) {
                     arrayCarritoBorrar.splice(i, 1);
                     break;
                 }
-
             }
-
             localStorage.setItem("Carrito", JSON.stringify(arrayCarritoBorrar));
-
         }
     })
 

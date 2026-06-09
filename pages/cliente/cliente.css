@@ -71,53 +71,66 @@ a {
     color: #979494;
 }
 
+/*-- Sector productos --*/
 
-
-.img-producto{
+.img-producto {
     width: 100%;
-    
 }
 
-.titulo-seccion{
+.titulo-seccion {
     font-size: 40px;
 }
-.nombre-producto{
+
+.nombre-producto {
     font-weight: bold;
     font-size: 22px;
     color: black;
 }
 
-#Proteinas,#Creatinas,#Shackers{
+#Proteinas,
+#Creatinas,
+#Shackers {
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
 }
-.productos{
-    
+
+.productos {
     width: 400px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
+    border: 1px solid;
 }
 
-.contenedor-imagen{
+.productos:hover {
+    border-color: rgb(218, 214, 214);
+}
+
+.contenedor-imagen {
     width: 320px;
 }
 
-#integrantes{
+#integrantes {
     font-size: 19px;
     text-align: center;
 }
 
-.boton-agregar,.boton-borrar{
+.boton-agregar,
+.boton-borrar {
     border-radius: 25px;
     width: 50px;
     height: 50px;
     font-size: 17px;
     font-weight: bold;
-    background-color: rgb(218, 214, 214) ;
+    background-color: rgb(218, 214, 214);
     border: none;
+}
+
+.boton-agregar:active,
+.boton-borrar:active {
+    background-color: rgb(148, 146, 146);
 }
 
 .nombreBienvenida {
@@ -129,14 +142,13 @@ a {
     margin-left: auto;
 }
 
-.precio-producto{
+.precio-producto {
     color: #CAA959;
     font-weight: bold;
     font-size: 22px;
 }
 
-
-.botones-productos{
+.botones-productos {
     display: flex;
     padding-top: 8px;
     column-gap: 30px;

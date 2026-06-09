@@ -36,14 +36,23 @@ function crearCarrito(){
         productounico.cantidad=cantidad;
     })
 
-    let arrayCarritoUnicoHTML=arrayCarritoUnico.map(producto=>`<div><div class="contenedor-imagen"><img  src="${producto.img}" alt="${producto.nombre}" class="imagen-carrito" ></div><p>${producto.nombre}</p>${producto.precio}<p></p><button class="boton-agregar" id="boton-agregar-${producto.nombre}">+</button><p id="cantidad-${producto.nombre}">${producto.cantidad}</p><button class="boton-borrar" id="boton-borrar-${producto.nombre}">-</button></div><hr>`);
-
+    let arrayCarritoUnicoHTML=arrayCarritoUnico.map(producto =>
+        `<div>
+            <div class="contenedor-imagen">
+                <img  src="${producto.img}" alt="${producto.nombre}" class="imagen-carrito" >
+            </div>
+            <p>${producto.nombre}</p>
+            <p>${producto.precio}</p>
+            <button class="boton-agregar" id="boton-agregar-${producto.nombre}">+</button>
+            <p id="cantidad-${producto.nombre}">${producto.cantidad}</p>
+            <button class="boton-borrar" id="boton-borrar-${producto.nombre}">-</button>
+        </div>
+        <hr>`);
     
     let stringCarritoUnicoHTML=arrayCarritoUnicoHTML.join("");
     const total=arrayCarritoUnico.reduce((acumulador,elemento)=>acumulador + elemento.precio*elemento.cantidad,0);
     stringCarritoUnicoHTML +=`<p>TOTAL:${total}</p>`;
     zonaCarrito.innerHTML=stringCarritoUnicoHTML;
-
 }
 
 function crearEscuchadorBotonAgregar(texto){
@@ -70,8 +79,6 @@ function crearEscuchadorBotonAgregar(texto){
         let CarritoJSON=JSON.stringify(arrayCarrito);
         localStorage.setItem("Carrito",CarritoJSON);
 
-
-
         let posicion;
         arrayCarritoUnico.forEach((producto,indice)=>{
             if(producto.nombre===texto){
@@ -82,7 +89,6 @@ function crearEscuchadorBotonAgregar(texto){
 
         zonaCantidad.innerHTML=posicion;
     });
-
 }
 
 function crearEscuchadorBotonBorrar(texto){
@@ -96,16 +102,11 @@ function crearEscuchadorBotonBorrar(texto){
                 if(arrayCarritoBorrar[i].nombre===texto){
                     arrayCarritoBorrar.splice(i,1);
                     break;
-                }
-                
-            }
-            
+                }  
+            }   
             localStorage.setItem("Carrito",JSON.stringify(arrayCarritoBorrar));
-
         }
         
-
-
         let posicion=0;
         arrayCarritoUnico.forEach((producto,indice)=>{
             if(producto.nombre===texto && producto.cantidad>=1){
@@ -115,9 +116,6 @@ function crearEscuchadorBotonBorrar(texto){
         });
 
         zonaCantidad.innerHTML=posicion;
-    
-    
-    
     });
 
 }
@@ -126,5 +124,4 @@ console.table(arrayProteinas);
 console.table(arrayShackers);
 crearCarrito();
 arrayCarritoUnico.forEach(producto=>crearEscuchadorBotonAgregar(producto.nombre));
-
 arrayCarritoUnico.forEach(producto=>crearEscuchadorBotonBorrar(producto.nombre));
