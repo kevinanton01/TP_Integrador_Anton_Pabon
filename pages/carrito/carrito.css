@@ -45,6 +45,14 @@ a {
     font-size: 17px;
 }
 
+/* --- Estilos Carrito (Para ver bien el footer) --- */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 /* --- Estilos Carrito --- */
 
 .imagen-carrito{
@@ -66,9 +74,7 @@ a {
 /* --- Estilos footer --- */
 
 footer {
-    bottom: 0; /* lo pegamos al borde inferior */
-    left: 0;
-    width: 100%;
+    margin-top: auto;
     color: rgb(146, 146, 146);
     font-size: 14px;
 }

@@ -2,7 +2,7 @@ let proteinas = [{ 'id': 1, 'nombre': 'Isoprot', 'precio': 126000, 'img': '../..
 let creatinas = [{ 'id': 6, 'nombre': 'Creatina-monohidrato', 'precio': 45000, 'img': '../../img/Creatina-monohidrato.webp' }, { 'id': 7, 'nombre': 'Creatina-electrolitos', 'precio': 31200, 'img': '../../img/Creatina-electrolitos.webp' }, { 'id': 8, 'nombre': 'Creatina-monohidrato-1kilo', 'precio': 92000, 'img': '../../img/Creatina-monohidrato-1kilo.webp' }];
 let shakers = [{ 'id': 9, 'nombre': 'Shaker-ENA', 'precio': 6700, 'img': '../../img/Shaker-ENA.webp' }, { 'id': 10, 'nombre': 'Shaker-PLUS', 'precio': 7400, 'img': '../../img/Shaker-PLUS.webp' }, { 'id': 11, 'nombre': 'Shaker-premium-truemade', 'precio': 27000, 'img': '../../img/Shaker-premium-truemade.webp' }, { 'id': 12, 'nombre': 'Shaker-premium', 'precio': 27000, 'img': '../../img/Shaker-premium.webp' }];
 
-let arrayCarrito = [];
+let arrayCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
 
 localStorage.setItem("proteinas", JSON.stringify(proteinas));
 localStorage.setItem("creatinas", JSON.stringify(creatinas));

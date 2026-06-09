@@ -117,6 +117,7 @@ body main {
 /* --- Estilos footer --- */
 
 footer {
+    position: fixed; /* el elemento queda fijo en la ventana */
     bottom: 0; /* lo pegamos al borde inferior */
     left: 0;
     width: 100%;
