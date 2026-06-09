@@ -8,10 +8,13 @@
 
 /* --- Estilos Header (encabezado) --- */
 header {
+    position: sticky; /* mantenerlo siempre fijo*/
+    top:0;
     display: flex;
     padding: 10px 20px;
     box-shadow: 0 2px 5px #0000001a;
     font-weight: bold;
+    background-color: white;
 }
 
 #icono-principal {
