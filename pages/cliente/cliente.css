@@ -22,11 +22,11 @@ header {
     height: 70px;
 }
 
-.nombreAlumno {
+.nombreUsuario{
     color: black;
-    font-size: 14px;
+    font-size: 18px;
     display: flex;
-    align-items: center;
+    padding-top: 20px;
     margin-left: auto;
 }
 

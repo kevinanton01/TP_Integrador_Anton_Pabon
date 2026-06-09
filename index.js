@@ -7,6 +7,7 @@ function ingresar() {
         return;
     }
 
+    localStorage.setItem("nombreUsuario", nombre.value);
     location.href = "./pages/cliente/cliente.html";
 }
 

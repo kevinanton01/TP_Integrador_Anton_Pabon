@@ -2,12 +2,17 @@ let proteinas = [{ 'id': 1, 'nombre': 'Isoprot', 'precio': 126000, 'img': '../..
 let creatinas = [{ 'id': 6, 'nombre': 'Creatina-monohidrato', 'precio': 45000, 'img': '../../img/Creatina-monohidrato.webp' }, { 'id': 7, 'nombre': 'Creatina-electrolitos', 'precio': 31200, 'img': '../../img/Creatina-electrolitos.webp' }, { 'id': 8, 'nombre': 'Creatina-monohidrato-1kilo', 'precio': 92000, 'img': '../../img/Creatina-monohidrato-1kilo.webp' }];
 let shakers = [{ 'id': 9, 'nombre': 'Shaker-ENA', 'precio': 6700, 'img': '../../img/Shaker-ENA.webp' }, { 'id': 10, 'nombre': 'Shaker-PLUS', 'precio': 7400, 'img': '../../img/Shaker-PLUS.webp' }, { 'id': 11, 'nombre': 'Shaker-premium-truemade', 'precio': 27000, 'img': '../../img/Shaker-premium-truemade.webp' }, { 'id': 12, 'nombre': 'Shaker-premium', 'precio': 27000, 'img': '../../img/Shaker-premium.webp' }];
 
-
 let arrayCarrito = [];
 
 localStorage.setItem("proteinas", JSON.stringify(proteinas));
 localStorage.setItem("creatinas", JSON.stringify(creatinas));
 localStorage.setItem("shakers", JSON.stringify(shakers));
+
+function mostrarNombreUsuario() {
+    const nombre = localStorage.getItem("nombreUsuario");
+    document.querySelector(".nombreUsuario").textContent = `Bienvenido ${nombre}`;
+}
+mostrarNombreUsuario();
 
 function insertarProductos(array, id) {
     const zona = document.getElementById(id);
@@ -44,9 +49,9 @@ function crearEscuchadorBotonAgregar(texto) {
                 arrayCarrito.push(structuredClone(creatina));
             }
         });
-        shakers.forEach(shacker => {
-            if (shacker.nombre === texto) {
-                arrayCarrito.push(structuredClone(shacker));
+        shakers.forEach(shaker => {
+            if (shaker.nombre === texto) {
+                arrayCarrito.push(structuredClone(shaker));
             }
         });
         let CarritoJSON = JSON.stringify(arrayCarrito);
@@ -72,9 +77,9 @@ function crearEscuchadorBotonBorrar(texto) {
 
 }
 proteinas.forEach(proteina => crearEscuchadorBotonAgregar(proteina.nombre));
-shakers.forEach(shacker => crearEscuchadorBotonAgregar(shacker.nombre));
+shakers.forEach(shaker => crearEscuchadorBotonAgregar(shaker.nombre));
 creatinas.forEach(creatina => crearEscuchadorBotonAgregar(creatina.nombre));
 
 proteinas.forEach(proteina => crearEscuchadorBotonBorrar(proteina.nombre));
-shakers.forEach(shacker => crearEscuchadorBotonBorrar(shacker.nombre));
+shakers.forEach(shaker => crearEscuchadorBotonBorrar(shaker.nombre));
 creatinas.forEach(creatina => crearEscuchadorBotonBorrar(creatina.nombre));
