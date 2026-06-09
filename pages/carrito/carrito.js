@@ -37,21 +37,25 @@ function crearCarrito(){
     })
 
     let arrayCarritoUnicoHTML=arrayCarritoUnico.map(producto =>
-        `<div>
+        `<div class=contenedor-producto>
             <div class="contenedor-imagen">
-                <img  src="${producto.img}" alt="${producto.nombre}" class="imagen-carrito" >
+                <img src="${producto.img}" alt="${producto.nombre}" class="imagen-carrito" >
             </div>
-            <p>${producto.nombre}</p>
-            <p>${producto.precio}</p>
-            <button class="boton-agregar" id="boton-agregar-${producto.nombre}">+</button>
-            <p id="cantidad-${producto.nombre}">${producto.cantidad}</p>
-            <button class="boton-borrar" id="boton-borrar-${producto.nombre}">-</button>
+            <div class="contenedor-info">
+                <p>${producto.nombre}</p>
+                <p>$${producto.precio}</p>
+            </div>
+            <div class="botones-carrito">
+                <button class="boton-agregar" id="boton-agregar-${producto.nombre}">+</button>
+                <p id="cantidad-${producto.nombre}">${producto.cantidad}</p>
+                <button class="boton-borrar" id="boton-borrar-${producto.nombre}">-</button>
+            </div>
         </div>
         <hr>`);
     
     let stringCarritoUnicoHTML=arrayCarritoUnicoHTML.join("");
     const total=arrayCarritoUnico.reduce((acumulador,elemento)=>acumulador + elemento.precio*elemento.cantidad,0);
-    stringCarritoUnicoHTML +=`<p>TOTAL:${total}</p>`;
+    stringCarritoUnicoHTML +=`<p>TOTAL: $${total}</p>`;
     zonaCarrito.innerHTML=stringCarritoUnicoHTML;
 }
 
