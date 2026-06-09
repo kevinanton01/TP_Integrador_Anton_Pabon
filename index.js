@@ -32,4 +32,3 @@ function validarAdmin() {
         alert("Usuario o contraseña incorrectos");
     }
 }
-
