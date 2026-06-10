@@ -136,10 +136,16 @@ a {
     border: none;
 }
 
+.boton-agregar:hover,
+.boton-borrar:hover {
+    background-color: rgb(189, 189, 187);
+}
+
 .boton-agregar:active,
 .boton-borrar:active {
     background-color: rgb(146, 146, 145);
 }
+
 
 .nombreBienvenida {
     color: black;

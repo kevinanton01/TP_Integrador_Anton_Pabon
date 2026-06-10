@@ -1,10 +1,8 @@
 let arrayProteinas=JSON.parse(localStorage.getItem("proteinas"));
 let arrayShakers=JSON.parse(localStorage.getItem("shakers"));
 let arrayCreatinas=JSON.parse(localStorage.getItem("creatinas"));
-//let arrayCarrito=[];
-//if(localStorage.getItem("Carrito")!==null){
-//    arrayCarrito=JSON.parse(localStorage.getItem("Carrito"));
-//}
+
+//arrayCarrito=JSON.parse(localStorage.getItem("Carrito")) || arrayCarrito=[];
 
 let arrayCarritoUnico=[];
 

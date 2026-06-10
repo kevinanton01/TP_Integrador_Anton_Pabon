@@ -91,6 +91,15 @@ body main {
     height: 50px;
 }
 
+#registro-usuario button:hover{
+    background-color: rgb(61, 23, 230);
+}
+
+#registro-usuario button:active{
+    background-color: rgb(25, 0, 134);
+}
+
+
 /* --- Estilos ingreso del administrador --- */
 
 #loginAdmin {
