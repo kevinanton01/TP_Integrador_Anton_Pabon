@@ -45,6 +45,24 @@ a {
     font-size: 17px;
 }
 
+#icono-cambiar {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+#icono-cambiar:hover {
+    background-color: rgb(189, 189, 187);
+}
+
+#icono-cambiar:active{
+    background-color: rgb(146, 146, 145);
+}
+
 /*--Estilos Main--*/
 
 #proteinas, #creatinas, #shakers {

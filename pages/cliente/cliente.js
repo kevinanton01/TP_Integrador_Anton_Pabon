@@ -79,3 +79,12 @@ creatinas.forEach(creatina => crearEscuchadorBotonAgregar(creatina.nombre));
 proteinas.forEach(proteina => crearEscuchadorBotonBorrar(proteina.nombre));
 shakers.forEach(shaker => crearEscuchadorBotonBorrar(shaker.nombre));
 creatinas.forEach(creatina => crearEscuchadorBotonBorrar(creatina.nombre));
+
+function irAInicio() {
+    location.href = "";
+}
+
+function cambiarDeUsuario(){
+    localStorage.clear();
+    location.href = "../../index.html";
+}

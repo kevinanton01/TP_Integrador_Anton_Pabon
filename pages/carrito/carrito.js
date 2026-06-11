@@ -143,3 +143,7 @@ function confirmarCompra(){
         console.log("compra confirmada.")
     }
 }
+
+function irAInicio() {
+    location.href = "../cliente/cliente.html";
+}

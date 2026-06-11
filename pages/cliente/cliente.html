@@ -10,10 +10,9 @@
 </head>
 <body>
     <header>
-        <img id="icono-principal" src="../../img/logo.png" alt="Logo Proteina" />
+        <img onclick="irAInicio()" id="icono-principal" src="../../img/logo.png" alt="Logo Proteina" />
 
         <nav id="listado-opciones">
-            <a href="">Inicio</a>
             <a href="#proteinas">Proteinas</a>
             <a href="#creatinas">Creatinas</a>
             <a href="#shakers">Shakers</a>
@@ -21,6 +20,9 @@
         </nav>
 
         <div class="nombreUsuario"></div>
+        <div id="botonCambiarUsuario" onclick="cambiarUsuario()">
+            <img onclick="cambiarDeUsuario()" id="icono-cambiar" src="../../img/cambiar.png" alt="Cambiar Usuario" />
+        </div>
     </header>
 
     <main>
