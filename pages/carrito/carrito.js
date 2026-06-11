@@ -40,6 +40,13 @@ function crearCarrito() {
     let stringCarritoUnicoHTML = arrayCarritoUnicoHTML.join("");
     const total = arrayCarritoUnico.reduce((acumulador, elemento) => acumulador + elemento.precio * elemento.cantidad, 0); // recorre todo el array y se obtiene un unico valor.
     stringCarritoUnicoHTML += `<p id="precio-total">TOTAL: $${total}</p>`;
+    if (arrayCarritoUnico.length > 0) {
+    stringCarritoUnicoHTML += `
+        <button id="botonConfirmar" onclick="confirmarCompra()">
+            Confirmar
+        </button>
+    `;
+}
     zonaCarrito.innerHTML = stringCarritoUnicoHTML;
 }
 
@@ -129,4 +136,10 @@ function actualizarTotal() {
 
     document.getElementById("precio-total").innerHTML =
         `TOTAL: $${total}`;
+}
+
+function confirmarCompra(){
+    if (arrayCarritoUnico.length > 0) {
+        console.log("compra confirmada.")
+    }
 }

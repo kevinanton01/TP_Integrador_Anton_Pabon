@@ -8,8 +8,9 @@
 
 /* --- Estilos Header (encabezado) --- */
 header {
-    position: sticky; /* mantenerlo siempre fijo*/
-    top:0;
+    position: sticky;
+    /* mantenerlo siempre fijo*/
+    top: 0;
     display: flex;
     padding: 10px 20px;
     box-shadow: 0 2px 5px #0000001a;
@@ -53,18 +54,18 @@ body {
     flex-direction: column;
 }
 
-.section-carrito{
+.section-carrito {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-h2{
+h2 {
     text-align: center;
 }
 
-#carrito-productos{
+#carrito-productos {
     max-width: 600px;
     width: 100%;
     display: flex;
@@ -77,11 +78,11 @@ h2{
     align-items: center;
 }
 
-.contenedor-imagen{
+.contenedor-imagen {
     width: 90px;
 }
 
-.imagen-carrito{
+.imagen-carrito {
     width: 100%;
     border-radius: 8px;
 }
@@ -94,7 +95,7 @@ h2{
 }
 
 .boton-agregar,
-.boton-borrar{
+.boton-borrar {
     border: none;
     width: 38px;
     height: 38px;
@@ -104,22 +105,43 @@ h2{
     font-weight: bold;
 }
 
-.boton-agregar{
+.boton-agregar {
     background: #4caf50;
     color: white;
 }
 
-.boton-agregar:hover{
+.boton-agregar:hover {
     background: #3d8b40;
 }
 
-.boton-borrar{
+.boton-borrar {
     background: #e53935;
     color: white;
 }
 
-.boton-borrar:hover{
+.boton-borrar:hover {
     background: #c62828;
+}
+
+#botonConfirmar {
+    margin: auto;
+    display: block;
+    margin-top: 20px;
+    border-radius: 15px;
+    width: 110px;
+    height: 40px;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: rgb(218, 214, 214);
+    border: none;
+}
+
+#botonConfirmar:hover {
+    background-color: rgb(189, 189, 187);
+}
+
+#botonConfirmar:active {
+    background-color: rgb(146, 146, 145);
 }
 
 /* --- Estilos footer --- */
