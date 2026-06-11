@@ -4,10 +4,6 @@ let shakers = [{ 'id': 9, 'nombre': 'Shaker-ENA', 'precio': 6700, 'img': '../../
 
 let arrayCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
 
-localStorage.setItem("proteinas", JSON.stringify(proteinas));
-localStorage.setItem("creatinas", JSON.stringify(creatinas));
-localStorage.setItem("shakers", JSON.stringify(shakers));
-
 function mostrarNombreUsuario() {
     const nombre = localStorage.getItem("nombreUsuario");
     document.querySelector(".nombreUsuario").textContent = `Bienvenido ${nombre}`;

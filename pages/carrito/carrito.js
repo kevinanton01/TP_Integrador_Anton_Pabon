@@ -1,40 +1,26 @@
-let arrayProteinas=JSON.parse(localStorage.getItem("proteinas"));
-let arrayShakers=JSON.parse(localStorage.getItem("shakers"));
-let arrayCreatinas=JSON.parse(localStorage.getItem("creatinas"));
+let arrayCarritoUnico = [];
 
-//arrayCarrito=JSON.parse(localStorage.getItem("Carrito")) || arrayCarrito=[];
+function crearCarrito() {
+    let zonaCarrito = document.getElementById("carrito-productos");
+    let arrayCarritoExtraido = JSON.parse(localStorage.getItem("Carrito")) || [];
 
-let arrayCarritoUnico=[];
+    arrayCarritoExtraido.forEach(producto => {
 
-function crearCarrito(){
-    let zonaCarrito=document.getElementById("carrito-productos");
-    let stringCarritoExtraido=localStorage.getItem("Carrito");
-    let arrayCarritoExtraido=JSON.parse(stringCarritoExtraido);
-    
-    arrayCreatinas.forEach(creatina=>{
-        if(arrayCarritoExtraido.some(producto=>producto.nombre===creatina.nombre)===true){
-            arrayCarritoUnico.push(creatina);
-        }
-    });
-    arrayShakers.forEach(shacker=>{
-        if(arrayCarritoExtraido.some(producto=>producto.nombre===shacker.nombre)===true){
-            arrayCarritoUnico.push(shacker);
-        }
-    });
-    arrayProteinas.forEach(proteina=>{
-        if(arrayCarritoExtraido.some(producto=>producto.nombre===proteina.nombre)===true){
-            arrayCarritoUnico.push(proteina);
+        let productoExistente = arrayCarritoUnico.find(
+            productoBuscado => productoBuscado.nombre === producto.nombre
+        );
+
+        if (productoExistente) {
+            productoExistente.cantidad++;
+        } else {
+            arrayCarritoUnico.push({
+                ...producto, // Traigo los demas datos del producto
+                cantidad: 1
+            });
         }
     });
 
-    arrayCarritoUnico.forEach(productounico=>{
-
-        let arrayProductos=arrayCarritoExtraido.filter(productoextraido=>productoextraido.nombre===productounico.nombre);
-        let cantidad=arrayProductos.length;
-        productounico.cantidad=cantidad;
-    })
-
-    let arrayCarritoUnicoHTML=arrayCarritoUnico.map(producto =>
+    let arrayCarritoUnicoHTML = arrayCarritoUnico.map(producto =>
         `<div class=contenedor-producto>
             <div class="contenedor-imagen">
                 <img src="${producto.img}" alt="${producto.nombre}" class="imagen-carrito" >
@@ -50,80 +36,97 @@ function crearCarrito(){
             </div>
         </div>
         <hr>`);
-    
-    let stringCarritoUnicoHTML=arrayCarritoUnicoHTML.join("");
-    const total=arrayCarritoUnico.reduce((acumulador,elemento)=>acumulador + elemento.precio*elemento.cantidad,0);
-    stringCarritoUnicoHTML +=`<p>TOTAL: $${total}</p>`;
-    zonaCarrito.innerHTML=stringCarritoUnicoHTML;
+
+    let stringCarritoUnicoHTML = arrayCarritoUnicoHTML.join("");
+    const total = arrayCarritoUnico.reduce((acumulador, elemento) => acumulador + elemento.precio * elemento.cantidad, 0); // recorre todo el array y se obtiene un unico valor.
+    stringCarritoUnicoHTML += `<p id="precio-total">TOTAL: $${total}</p>`;
+    zonaCarrito.innerHTML = stringCarritoUnicoHTML;
 }
 
-function crearEscuchadorBotonAgregar(texto){
-    //arrayCarrito=JSON.parse(localStorage.getItem("Carrito"));
-    let zonaCantidad=document.getElementById("cantidad-"+texto);
-    let boton=document.getElementById(`boton-agregar-${texto}`);
-    boton.addEventListener("click",()=>{
-        let arrayCarrito=JSON.parse(localStorage.getItem("Carrito"));
-        arrayProteinas.forEach(proteina=>{
-            if(proteina.nombre===texto){
-                arrayCarrito.push(structuredClone(proteina));
-            }
-        });
-        arrayCreatinas.forEach(creatina=>{
-            if(creatina.nombre===texto){
-                arrayCarrito.push(structuredClone(creatina));
-            }
-        });
-        arrayShakers.forEach(shacker=>{
-            if(shacker.nombre===texto){
-                arrayCarrito.push(structuredClone(shacker));
-            }
-        });
-        let CarritoJSON=JSON.stringify(arrayCarrito);
-        localStorage.setItem("Carrito",CarritoJSON);
+function crearEscuchadorBotonAgregar(texto) {
+    let zonaCantidad = document.getElementById("cantidad-" + texto);
+    let boton = document.getElementById(`boton-agregar-${texto}`);
+
+    boton.addEventListener("click", () => {
+        let arrayCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
+
+        let producto = arrayCarritoUnico.find(
+            item => item.nombre === texto
+        );
+
+        if (producto) {
+            arrayCarrito.push(structuredClone(producto)); // agrego una copia al carrito.
+        }
+
+        localStorage.setItem("Carrito", JSON.stringify(arrayCarrito));
 
         let posicion;
-        arrayCarritoUnico.forEach((producto,indice)=>{
-            if(producto.nombre===texto){
-                producto.cantidad += 1;
-                posicion=producto.cantidad;
+
+        arrayCarritoUnico.forEach(producto => {
+            if (producto.nombre === texto) {
+                producto.cantidad++;
+                posicion = producto.cantidad;
             }
         });
 
-        zonaCantidad.innerHTML=posicion;
+        zonaCantidad.innerHTML = posicion;
+
+        actualizarTotal();
     });
 }
 
-function crearEscuchadorBotonBorrar(texto){
-    let zonaCantidad=document.getElementById("cantidad-"+texto);
-    let boton=document.getElementById("boton-borrar-"+texto);
-    boton.addEventListener("click",()=>{
-        let JSONCarrito=localStorage.getItem("Carrito");
-        if(JSONCarrito!==null){
-            let arrayCarritoBorrar=JSON.parse(JSONCarrito);
+function crearEscuchadorBotonBorrar(texto) {
+    let zonaCantidad = document.getElementById("cantidad-" + texto);
+    let boton = document.getElementById("boton-borrar-" + texto);
+
+    boton.addEventListener("click", () => {
+        let JSONCarrito = localStorage.getItem("Carrito");
+
+        if (JSONCarrito !== null) {
+            let arrayCarritoBorrar = JSON.parse(JSONCarrito); // convierto el texto JSON en un array de JavaScript.
+
             for (let i = 0; i < arrayCarritoBorrar.length; i++) {
-                if(arrayCarritoBorrar[i].nombre===texto){
-                    arrayCarritoBorrar.splice(i,1);
+                if (arrayCarritoBorrar[i].nombre === texto) {
+                    arrayCarritoBorrar.splice(i, 1); // elimino un elemento a partir de posicion i.
                     break;
-                }  
-            }   
-            localStorage.setItem("Carrito",JSON.stringify(arrayCarritoBorrar));
+                }
+            }
+
+            localStorage.setItem("Carrito", JSON.stringify(arrayCarritoBorrar));
         }
-        
-        let posicion=0;
-        arrayCarritoUnico.forEach((producto,indice)=>{
-            if(producto.nombre===texto && producto.cantidad>=1){
-                producto.cantidad -= 1;
-                posicion=producto.cantidad;
+
+        let posicion = 0;
+
+        arrayCarritoUnico.forEach(producto => {
+            if (producto.nombre === texto && producto.cantidad >= 1) {
+                producto.cantidad--;
+                posicion = producto.cantidad;
             }
         });
 
-        zonaCantidad.innerHTML=posicion;
-    });
+        zonaCantidad.innerHTML = posicion;
 
+        actualizarTotal();
+    });
 }
-console.table(arrayCreatinas);
-console.table(arrayProteinas);
-console.table(arrayShakers);
+
 crearCarrito();
-arrayCarritoUnico.forEach(producto=>crearEscuchadorBotonAgregar(producto.nombre));
-arrayCarritoUnico.forEach(producto=>crearEscuchadorBotonBorrar(producto.nombre));
+
+arrayCarritoUnico.forEach(producto =>
+    crearEscuchadorBotonAgregar(producto.nombre)
+);
+
+arrayCarritoUnico.forEach(producto =>
+    crearEscuchadorBotonBorrar(producto.nombre)
+);
+
+function actualizarTotal() {
+    const total = arrayCarritoUnico.reduce(
+        (acumulador, elemento) =>
+            acumulador + elemento.precio * elemento.cantidad,
+        0
+    );
+
+    document.getElementById("precio-total").innerHTML =
+        `TOTAL: $${total}`;
+}
