@@ -1,6 +1,23 @@
-let proteinas = [{ 'id': 1, 'nombre': 'Isoprot', 'precio': 126000, 'img': '../../img/Isoprot.webp' }, { 'id': 2, 'nombre': 'Ultra-mass', 'precio': 59400, 'img': '../../img/Ultra-mass.webp' }, { 'id': 3, 'nombre': 'Whey-x-pro', 'precio': 98000, 'img': '../../img/Whey-x-pro.webp' }, { 'id': 4, 'nombre': 'Starter-protein', 'precio': 42300, 'img': '../../img/Starter-protein.webp' }, { 'id': 5, 'nombre': 'Plant-protein', 'precio': 53000, 'img': '../../img/Plant-protein.webp' }];
-let creatinas = [{ 'id': 6, 'nombre': 'Creatina-monohidrato', 'precio': 45000, 'img': '../../img/Creatina-monohidrato.webp' }, { 'id': 7, 'nombre': 'Creatina-electrolitos', 'precio': 31200, 'img': '../../img/Creatina-electrolitos.webp' }, { 'id': 8, 'nombre': 'Creatina-monohidrato-1kilo', 'precio': 92000, 'img': '../../img/Creatina-monohidrato-1kilo.webp' }];
-let shakers = [{ 'id': 9, 'nombre': 'Shaker-ENA', 'precio': 6700, 'img': '../../img/Shaker-ENA.webp' }, { 'id': 10, 'nombre': 'Shaker-PLUS', 'precio': 7400, 'img': '../../img/Shaker-PLUS.webp' }, { 'id': 11, 'nombre': 'Shaker-premium-truemade', 'precio': 27000, 'img': '../../img/Shaker-premium-truemade.webp' }, { 'id': 12, 'nombre': 'Shaker-premium', 'precio': 27000, 'img': '../../img/Shaker-premium.webp' }];
+let productos = [
+    { id: 1, nombre: 'Isoprot', img: '../../img/Isoprot.webp', categoria: 'proteina', precio: 126000 },
+    { id: 2, nombre: 'Ultra-mass', img: '../../img/Ultra-mass.webp', categoria: 'proteina', precio: 59400 },
+    { id: 3, nombre: 'Whey-x-pro', img: '../../img/Whey-x-pro.webp', categoria: 'proteina', precio: 98000 },
+    { id: 4, nombre: 'Starter-protein', img: '../../img/Starter-protein.webp', categoria: 'proteina', precio: 42300 },
+    { id: 5, nombre: 'Plant-protein', img: '../../img/Plant-protein.webp', categoria: 'proteina', precio: 53000 },
+
+    { id: 6, nombre: 'Creatina-monohidrato', img: '../../img/Creatina-monohidrato.webp', categoria: 'creatina', precio: 45000 },
+    { id: 7, nombre: 'Creatina-electrolitos', img: '../../img/Creatina-electrolitos.webp', categoria: 'creatina', precio: 31200 },
+    { id: 8, nombre: 'Creatina-monohidrato-1kilo', img: '../../img/Creatina-monohidrato-1kilo.webp', categoria: 'creatina', precio: 92000 },
+
+    { id: 9, nombre: 'Shaker-ENA', img: '../../img/Shaker-ENA.webp', categoria: 'shaker', precio: 6700 },
+    { id: 10, nombre: 'Shaker-PLUS', img: '../../img/Shaker-PLUS.webp', categoria: 'shaker', precio: 7400 },
+    { id: 11, nombre: 'Shaker-premium-truemade', img: '../../img/Shaker-premium-truemade.webp', categoria: 'shaker', precio: 27000 },
+    { id: 12, nombre: 'Shaker-premium', img: '../../img/Shaker-premium.webp', categoria: 'shaker', precio: 27000 }
+];
+
+let proteinas = productos.filter(producto => producto.categoria === "proteina");
+let creatinas = productos.filter(producto => producto.categoria === "creatina");
+let shakers = productos.filter(producto => producto.categoria === "shaker");
 
 let arrayCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
 
