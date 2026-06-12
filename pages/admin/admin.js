@@ -1,3 +1,0 @@
-function irAInicio() {
-    location.href = "";
-}

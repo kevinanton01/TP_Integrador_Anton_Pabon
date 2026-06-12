@@ -1,0 +1,115 @@
+/* --- Estilos generales --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* --- Estilos Header (encabezado) --- */
+header {
+    position: sticky; /* mantenerlo siempre fijo*/
+    top:0;
+    display: flex;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px #0000001a;
+    font-weight: bold;
+    background-color: white;
+}
+
+#icono-principal {
+    width: 160px;
+    height: 70px;
+}
+
+.nombreUsuario{
+    color: black;
+    font-size: 18px;
+    display: flex;
+    padding-top: 20px;
+    margin-left: auto;
+}
+
+#listado-opciones {
+    display: flex;
+    align-items: center;
+    height: 55px;
+    padding-top: 11px;
+}
+
+a {
+    margin-left: 15px;
+    margin-right: 15px;
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+}
+
+#icono-cambiar {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    margin-top: 15px;
+}
+
+#botonCambiarUsuario {
+    margin-left: auto;
+}
+
+#icono-cambiar:hover {
+    background-color: rgb(189, 189, 187);
+}
+
+#icono-cambiar:active{
+    background-color: rgb(146, 146, 145);
+}
+
+/* --- Estilos body --- */
+
+body main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#getProduct-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#idProd {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #d1d0d0;
+}
+
+#botonIdProd {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #57b44b;
+    border-color: #48cc36;
+}
+
+hr {
+    margin-top: 10px;
+    border-top: 1px solid rgb(156, 156, 156);
+    width: 100%;
+}
+
+.secccion-productos {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* --- Estilos footer --- */
+
+footer {
+    margin-top: auto;
+    color: rgb(146, 146, 146);
+    font-size: 14px;
+}
