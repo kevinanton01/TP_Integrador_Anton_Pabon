@@ -115,3 +115,30 @@ footer {
 }
 
 
+
+.nombre-producto {
+    font-weight: bold;
+    font-size: 22px;
+    color: black;
+}
+
+
+.precio-producto {
+    color: #CAA959;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.img-producto {
+    width: 100%;
+}
+
+.contenedor-imagen {
+    width: 320px;
+}
+
+#contenedor-producto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

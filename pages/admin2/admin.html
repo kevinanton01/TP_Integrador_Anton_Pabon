@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protein AP</title>
+
+    <!-- Importacion de archivo CSS (Estilos) -->
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+    <header>
+        <img onclick="irAInicio()" id="icono-principal" src="../../img/logo.png" alt="Logo Proteina" />
+
+        <nav id="listado-opciones">
+            <a href="">VER</a>
+            <a href="./get.html">CONSULTAR</a>
+            <a href="./post.html">CREAR</a>
+            <a href="./put.html">MODIFICAR</a>
+            <a href="./delete.html">ELIMINAR</a>
+        </nav>
+
+        <div id="botonCambiarUsuario" onclick="cambiarUsuario()">
+            <img onclick="cambiarDeUsuario()" id="icono-cambiar" src="../../img/cambiar.png" alt="Cambiar Usuario" />
+        </div>
+    </header>
+
+    <main>
+        <div id="productos">
+            <h2 class="h2-separador">Nuestros Productos</h2>
+            <ul id="listado-productos">
+
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>Todos los derechos reservados | Whey Protein AP</p>
+        <p>Alumnos: Antón kevin - Gabriel Pabon</p>
+    </footer>
+    
+    <!-- Importacion de archivo JS (Comportamiento) -->
+    <script src="./js/admin.js"></script>
+</body>
+</html>
