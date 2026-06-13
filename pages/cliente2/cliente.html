@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protein AP</title>
+
+    <!-- Importacion de archivo CSS (Estilos) -->
+    <link rel="stylesheet" href="./cliente.css">
+</head>
+<body>
+    <header>
+        <img onclick="irAInicio()" id="icono-principal" src="../../img/logo.png" alt="Logo Proteina" />
+
+        <nav id="listado-opciones">
+            <a href="#proteinas">Proteinas</a>
+            <a href="#creatinas">Creatinas</a>
+            <a href="#shakers">Shakers</a>
+            <a href="../carrito/carrito.html">Mi carrito</a>
+        </nav>
+
+        <div class="nombreUsuario"></div>
+        <div id="botonCambiarUsuario" onclick="cambiarUsuario()">
+            <img onclick="cambiarDeUsuario()" id="icono-cambiar" src="../../img/cambiar.png" alt="Cambiar Usuario" />
+        </div>
+    </header>
+
+    <main>
+        <!-- Seccion de Proteinas -->
+        <section id="proteinas">
+            <h2 class="h2-separador">Proteína en polvo y suplementos proteicos</h2>
+            <p class="descripcion-producto">
+                Las proteínas son el suplemento más importante para quienes buscan aumentar masa muscular, acelerar la recuperación y complementar su alimentación diaria.
+            </p>
+            <ul id="listado-proteinas">
+
+            </ul>
+        </section>
+
+        <!-- Seccion de Creatinas -->
+        <section id="creatinas">
+            <h2 class="h2-separador">Creatinas</h2>
+            <p class="descripcion-producto">
+                La creatina es el suplemento deportivo con mayor respaldo científico para mejorar la fuerza, la potencia muscular y el rendimiento en entrenamientos de alta intensidad.
+            </p>
+            <ul id="listado-creatinas">
+                
+            </ul>
+        </section>
+
+        <!-- Seccion de Shakers -->
+        <section id="shakers">
+            <h2 class="h2-separador">Shakers</h2>
+            <p class="descripcion-producto">
+                Un buen shaker hace la diferencia a la hora de preparar tus suplementos: sin grumos, sin derrames y siempre listo para llevar. Shakers con distintas capacidades, compartimentos para proteína en polvo y pastillero integrado para que nada te falte en el gym.
+            </p>
+            <ul id="listado-shakers">
+                
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Todos los derechos reservados | Whey Protein AP</p>
+        <p>Alumnos: Antón kevin - Gabriel Pabon</p>
+    </footer>
+
+    <!-- Importacion de archivo JS (Comportamiento) -->
+    <script src="./cliente.js"></script>
+</body>
+</html>
