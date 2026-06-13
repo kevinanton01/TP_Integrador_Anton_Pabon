@@ -7,6 +7,8 @@
 
     <!-- Importacion de archivo CSS (Estilos) -->
     <link rel="stylesheet" href="./css/admin.css">
+
+    <script src="./js/post.js" defer></script>
 </head>
 <body>
     <header>
@@ -24,7 +26,42 @@
     </header>
 
     <main>
+        <form id="formulario">
+            <!--<div>-->
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre">
+            <!--</div>-->
+            <!--<div>-->
+                <label for="imagen">Imagen</label>
+                <input type="text" id="imagen" name="imagen">
+            <!--</div>-->
 
+            <div>
+                <label for="descripcion">Descripcion</label>
+                <input type="text" id="descripcion" name="descripcion">
+            </div>
+            <div>
+                <label for="categoria">Categoria</label>
+                <select name="categoria" id="categoria">
+                    <option value="proteina">proteina</option>
+                    <option value="creatina">creatina</option>
+                    <option value="shaker">shaker</option>
+                </select>
+            </div>   
+            <!--<div>-->
+                <label for="precio">Precio</label>
+                <input type="text" id="precio" name="precio">
+
+            <!--</div>-->
+            <!--<div>-->
+                <input type="submit" value="crear producto">
+
+            <!--</div>-->
+
+
+
+
+        </form>
     </main>
 
     <footer>
