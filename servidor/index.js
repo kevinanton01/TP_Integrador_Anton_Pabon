@@ -40,8 +40,8 @@ app.get("/api/productos/:id",async (req,res)=>{
 app.post("/api/productos",async (req,res)=>{
     const producto=req.body;
 
-    await connection.query(`INSERT INTO productos(nombre,categoria,precio,descripcion,imagen,activo)
-    VALUES("${producto.nombre}","${producto.categoria}",${producto.precio},"${producto.descripcion}","${producto.imagen}",TRUE)`);
+    await connection.query(`INSERT INTO productos(nombre,categoria,precio,imagen,activo)
+    VALUES("${producto.nombre}","${producto.categoria}",${producto.precio},"${producto.imagen}",TRUE)`);
     res.status(200).json(
         {mensaje: "producto creado con exito"}
     );
