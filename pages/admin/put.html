@@ -26,13 +26,50 @@
     <main>
 
     </main>
-
+         <section class="form-productos">
+             <h2>Consultar producto a modificar: </h2>
+             
+             
+             <form id="getProduct-form">
+                 <label for="idProd">Id del producto</label>
+                 <input type="number" name="id" id="idProd" min="1"  required>
+                 
+                 <input id="botonIdProd" type="submit" value="Consultar producto">
+                 
+                 
+                </form>
+                
+                        <hr>
+                        <section id="seccion-productos">
+                            
+                        </section>
+                <form action="modificar-producto">
+                <label for="id">Ingrese un nuevo id:</label>
+                <input type="text" name="id" id="id">
+                <label for="nombre">Ingrese un nuevo nombre:</label>
+                <input type="text" name="nombre" id="nombre">
+                <label for="categoria">Ingrese una categoria:</label>
+                <select name="categoria" id="categoria" >
+                    <option value="proteina" >proteina</option>
+                    <option value="creatina">creatina</option>
+                    <option value="shaker" >shaker</option>
+                </select>
+                <label for="precio">Ingrese un nuevo precio:</label>
+                <input type="text" name="precio" id="precio">
+                <label for="imagen">Ingrese una nueva imagen:</label>
+                <input type="text" name="imagen" id="imagen">
+                <input type="submit" value="Modificar Producto" id="subir-modificacion">
+            </form>
+            
+        </section>
+        
+        
     <footer>
         <p>Todos los derechos reservados | Whey Protein AP</p>
         <p>Alumnos: Antón kevin - Gabriel Pabon</p>
     </footer>
     
     <!-- Importacion de archivo JS (Comportamiento) -->
-    <script src="./js/admin.js"></script>
+    <script src="./js/put.js"></script>
 </body>
 </html>

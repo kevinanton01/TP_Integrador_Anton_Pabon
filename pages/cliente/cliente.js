@@ -14,6 +14,7 @@ function crearEscuchadorBotonBorrar(texto) {
             localStorage.setItem("Carrito", JSON.stringify(arrayCarritoBorrar));
         }
     })
+
 }
 
 function insertarProductos(array, id) {
@@ -34,8 +35,11 @@ function insertarProductos(array, id) {
     zona.innerHTML = stringZona;
 }
 
+
+
 async function mostrarDatosBase(){
     function crearEscuchadorBotonAgregar(texto) {
+
         let boton = document.getElementById(`boton-agregar-${texto}`);
         boton.addEventListener("click", () => {
             let arrayCarrito = JSON.parse(localStorage.getItem("Carrito")) || [];
@@ -59,6 +63,13 @@ async function mostrarDatosBase(){
         });
     }
 
+
+
+
+
+
+
+
     const response= await fetch("http://localhost:3000/api/productos");
     const data= await response.json();
     
@@ -66,6 +77,8 @@ async function mostrarDatosBase(){
     let proteinas = productos.filter(producto => producto.categoria === "proteina");
     let creatinas = productos.filter(producto => producto.categoria === "creatina");
     let shakers = productos.filter(producto => producto.categoria === "shaker");
+
+
 
     insertarProductos(proteinas, "listado-proteinas");
     insertarProductos(creatinas, "listado-creatinas");
@@ -78,15 +91,29 @@ async function mostrarDatosBase(){
     proteinas.forEach(proteina => crearEscuchadorBotonBorrar(proteina.nombre));
     shakers.forEach(shaker => crearEscuchadorBotonBorrar(shaker.nombre));
     creatinas.forEach(creatina => crearEscuchadorBotonBorrar(creatina.nombre));
+
+    
+
 }
 
+
 mostrarDatosBase();
+
+
+
 
 function mostrarNombreUsuario() {
     const nombre = localStorage.getItem("nombreUsuario");
     document.querySelector(".nombreUsuario").textContent = `Bienvenido ${nombre}`;
 }
 mostrarNombreUsuario();
+
+
+
+
+
+
+
 
 function irAInicio() {
     location.href = "";

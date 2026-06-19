@@ -1,8 +1,9 @@
 import express from "express";
-import connection from "./src/database/db.js";
+import connection from "./src/api/database/db.js";
+import environments from "./src/api/config/environments.js";
 import cors from "cors";
 const app=express();
-
+const port=parseInt(environments.port);
 app.use(cors());
 app.use(express.json());
 
@@ -47,12 +48,32 @@ app.post("/api/productos",async (req,res)=>{
     );
 });
 
+app.put("/api/productos",async (req,res)=>{
+    const id=req.body.id;
+    const sql="UPDATE productos SET activo=0 where id=?"
+
+    await connection.query(sql,[id]);
+    res.status(200).json(
+        {mensaje: "producto borrado con exito"}
+    );
+});
+
+
+app.put("/api/Modificar",async (req,res)=>{
+    const id=req.body.id;
+    const sql="UPDATE productos SET activo=0 where id=?"
+
+    await connection.query(sql,[id]);
+    res.status(200).json(
+        {mensaje: "producto borrado con exito"}
+    );
+});
 
 
 
 
 
 
-app.listen(3000,()=>{
-    console.log("servidor activo");
+app.listen(port,()=>{
+    console.log("servidor activo en el puerto "+port);
 })
