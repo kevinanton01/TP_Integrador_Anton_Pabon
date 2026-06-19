@@ -58,6 +58,15 @@ app.put("/api/productos",async (req,res)=>{
     );
 });
 
+app.put("/api/activar-productos",async (req,res)=>{
+    const id=req.body.id;
+    const sql="UPDATE productos SET activo=1 where id=?"
+
+    await connection.query(sql,[id]);
+    res.status(200).json(
+        {mensaje: "producto activado con exito"}
+    );
+});
 
 app.put("/api/modificar-producto",async (req,res)=>{
     const idAnterior=req.body.idAnterior;
