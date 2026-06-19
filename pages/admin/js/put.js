@@ -6,13 +6,14 @@ function CrearEscuchadorSubmit(idProducto){
         const objetoProducto=Object.fromEntries(datosForm.entries());
         const formularioBusqueda=document.getElementById("idProd");
         const objetoEnviar={"idAnterior":idProducto,"producto":objetoProducto};
-        const response= await fetch(`http://localhost:3000/api/productos`,{
+        const response= await fetch(`http://localhost:3000/api/modificar-producto`,{
             method:"PUT",
             headers:{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify(objetoEnviar)
         });
+        
     })
 }
 

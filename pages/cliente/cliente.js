@@ -60,7 +60,7 @@ async function mostrarDatosBase(){
         });
     }
 
-    const response= await fetch("http://localhost:3500/api/productos");
+    const response= await fetch("http://localhost:3000/api/productos");
     const data= await response.json();
     
     let productos=data.payload;

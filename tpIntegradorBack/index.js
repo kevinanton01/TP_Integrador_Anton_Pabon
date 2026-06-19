@@ -59,13 +59,14 @@ app.put("/api/productos",async (req,res)=>{
 });
 
 
-app.put("/api/Modificar",async (req,res)=>{
-    const id=req.body.id;
-    const sql="UPDATE productos SET activo=0 where id=?"
+app.put("/api/modificar-producto",async (req,res)=>{
+    const idAnterior=req.body.idAnterior;
+    const objetoNuevo=req.body.producto;
+    const sql="UPDATE productos SET id=? where id=?"
 
     await connection.query(sql,[id]);
     res.status(200).json(
-        {mensaje: "producto borrado con exito"}
+        {mensaje: "producto modificado con exito"}
     );
 });
 
