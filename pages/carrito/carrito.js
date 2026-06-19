@@ -23,7 +23,7 @@ function crearCarrito() {
     let arrayCarritoUnicoHTML = arrayCarritoUnico.map(producto =>
         `<div class=contenedor-producto>
             <div class="contenedor-imagen">
-                <img src="${producto.img}" alt="${producto.nombre}" class="imagen-carrito" >
+                <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-carrito" >
             </div>
             <div class="contenedor-info">
                 <p>${producto.nombre}</p>
