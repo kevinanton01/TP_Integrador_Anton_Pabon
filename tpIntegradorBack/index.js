@@ -69,11 +69,11 @@ app.put("/api/activar-productos",async (req,res)=>{
 });
 
 app.put("/api/modificar-producto",async (req,res)=>{
-    const idAnterior=req.body.idAnterior;
-    const objetoNuevo=req.body.producto;
-    const sql="UPDATE productos SET id=? where id=?"
+    const idAnterior=req.body.productoViejo.id;
+    const objetoNuevo=req.body.productoNuevo;
+    const sql="UPDATE productos SET id=?,nombre=?,categoria=?,precio=?,imagen=? where id=?"
 
-    await connection.query(sql,[id]);
+    await connection.query(sql,[objetoNuevo.id,objetoNuevo.nombre,objetoNuevo.categoria,objetoNuevo.precio,objetoNuevo.imagen,idAnterior]);
     res.status(200).json(
         {mensaje: "producto modificado con exito"}
     );

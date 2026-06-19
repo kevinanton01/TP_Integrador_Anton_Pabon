@@ -16,6 +16,15 @@ function activarProducto(idProducto){
 
 }
 
+function modificarProducto(producto){
+    const boton=document.getElementById("btn-modificar-"+producto.id);
+    boton.addEventListener("click",()=>{
+        localStorage.setItem("producto",JSON.stringify(producto));
+        window.location.href="put.html";
+    });
+
+}
+
 function mostrarProductos(array, id) {
     const zona = document.getElementById(id);
     let arrayzona = array.map(producto => `
@@ -25,7 +34,9 @@ function mostrarProductos(array, id) {
             </div>
             <p class="nombre-producto">${producto.nombre}</p>
             <p class="precio-producto">$${producto.precio}</p>
-            ${producto.activo === 0 ? `<button id="btn-activar-${producto.id}" class="btn-activar">Activar</button>` : ''}
+            ${producto.activo === 0 ? `<p class="texto-estado">Estado: Inactivo</p><button id="btn-activar-${producto.id}" >Activar</button>` : `<p class="texto-estado">Estado: activo</p>`}
+            <button id="btn-modificar-${producto.id}" >Modificar producto</button>
+            
         </div>`
         );
         const stringZona = arrayzona.join("");
@@ -34,6 +45,9 @@ function mostrarProductos(array, id) {
             if(producto.activo===0){
                 activarProducto(producto.id);  
             }
+        });
+        array.forEach(producto=>{
+            modificarProducto(producto);  
         });
     }
 async function mostrarDatosBase() {
