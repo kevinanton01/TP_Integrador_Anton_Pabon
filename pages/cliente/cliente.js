@@ -18,7 +18,9 @@ function crearEscuchadorBotonBorrar(texto) {
 
 function insertarProductos(array, id) {
     const zona = document.getElementById(id);
-    let arrayzona = array.map(producto => 
+    let arrayzona = array
+        .filter(producto => producto.activo === 1)
+        .map(producto => 
         `<div class="productos">
             <div class="contenedor-imagen">
                 <img src="${producto.imagen}" alt="${producto.nombre}" class="img-producto">

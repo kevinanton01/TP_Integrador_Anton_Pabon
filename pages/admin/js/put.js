@@ -29,7 +29,13 @@ function mostrarPantallaProductoModificar(){
             <input type="text" name="precio" id="precio">
             <label for="imagen">Ingrese una nueva imagen:</label>
             <input type="text" name="imagen" id="imagen">
-            <input type="submit" value="Modificar Producto" id="subir-modificacion">`
+            <label for="estado">Estado: </label>
+            <select name="estado" id="estado">
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+            <input type="submit" value="Modificar Producto" id="subir-modificacion">
+            `
 
     }
     CrearEscuchadorSubmit(productoExtraido);
