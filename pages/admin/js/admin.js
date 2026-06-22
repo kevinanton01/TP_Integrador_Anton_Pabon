@@ -33,6 +33,7 @@ function mostrarProductos(array, id) {
                 <img src="${producto.imagen}" alt="${producto.nombre}" class="img-producto">
             </div>
             <p class="nombre-producto">${producto.nombre}</p>
+            <p class="id-producto">ID: ${producto.id}</p>
             <p class="precio-producto">$${producto.precio}</p>
             ${producto.activo === 0 ? `<p class="texto-estado">Estado: Inactivo</p><button id="btn-activar-${producto.id}" >Activar</button>` : `<p class="texto-estado">Estado: activo</p>`}
             <button id="btn-modificar-${producto.id}" >Modificar producto</button>

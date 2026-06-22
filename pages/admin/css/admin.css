@@ -139,9 +139,6 @@ footer {
     font-size: 14px;
 }
 
-
-
-
-.texto-estado{
+.texto-estado, .id-producto{
     color:black;
 }
