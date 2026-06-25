@@ -8,11 +8,58 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/api/productos",async (req,res)=>{
-    const [rows] =await connection.query("SELECT * FROM productos");
-    res.status(200).json(
-        {payload: rows}
-    );
+    //optimizacion 3: extraemos la consulta sql en una variable y le quitamos el select * para evitar poner columnas innecesarias
+    const sql="SELECT id,imagen,nombre,categoria,precio FROM productos WHERE activo=1";
+    //optimizacion 1: manejar errores con try catch
+    try {
+        const [rows] =await connection.query(sql);
+        //optimizacion 4: devolvemos error 404 si no hay productos
+        if(rows.length===0){
+            return res.status(404).json({
+                mensaje: "no se encontraron productos"
+            });
+        }
+        res.status(200).json(
+            {payload: rows}
+        );
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            mensaje: "error interno del servidor al obtener productos"
+        });
+    }
 });
+
+
+app.get("/api/productos/mostrar-admin",async (req,res)=>{
+    //optimizacion 3: extraemos la consulta sql en una variable y le quitamos el select * para evitar poner columnas innecesarias
+    const sql="SELECT id,imagen,nombre,categoria,precio,activo FROM productoss";
+    //optimizacion 1: manejar errores con try catch
+    try {
+        const [rows] =await connection.query(sql);
+        //optimizacion 4: devolvemos error 404 si no hay productos
+        if(rows.length===0){
+            return res.status(404).json({
+                mensaje: "no se encontraron productos"
+            });
+        }
+        res.status(200).json(
+            {payload: rows}
+        );
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            mensaje: "error interno del servidor al obtener productos"
+        });
+    }
+});
+
+
+
+
+
 /*
 app.get("/api/ventas-productos",async (req,res)=>{
     const [rows] =await connection.query("SELECT productos.id,productos.nombre,productos.imagen,productos.categoria,productos.precio,productos.activo  FROM productos JOIN ventas_productos ON productos.id = ventas_productos.id_producto");

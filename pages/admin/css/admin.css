@@ -85,7 +85,7 @@ body {
     text-align: center;
 }
 
-#listado-productos {
+#productos {
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -141,4 +141,17 @@ footer {
 
 .texto-estado, .id-producto{
     color:black;
+}
+
+
+#mensajeError{
+    color: red;
+    background-color: rgb(255 144 144);
+    border: 1px solid red;
+    border-radius: 15px;
+    width: 600px;
+    height: 55px;
+    font-size: 25px;
+    text-align: center;
+    
 }

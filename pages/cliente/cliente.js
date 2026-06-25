@@ -19,7 +19,7 @@ function crearEscuchadorBotonBorrar(texto) {
 function insertarProductos(array, id) {
     const zona = document.getElementById(id);
     let arrayzona = array
-        .filter(producto => producto.activo === 1)
+       // .filter(producto => producto.activo === 1)
         .map(producto => 
         `<div class="productos">
             <div class="contenedor-imagen">
@@ -62,21 +62,23 @@ async function mostrarDatosBase(){
         });
     }
 
-
-    try {
+    const urlBase="http://localhost:3000/api/productos";
+ try {
         
-        const response= await fetch("http://localhost:3000/api/productos");
+        const response= await fetch(urlBase);
         const data= await response.json();
-        
+        console.log(data);
         let productos=data.payload;
+        console.log(productos);
         let proteinas = productos.filter(producto => producto.categoria === "proteina");
+        console.log(proteinas);
         let creatinas = productos.filter(producto => producto.categoria === "creatina");
         let shakers = productos.filter(producto => producto.categoria === "shaker");
     
         insertarProductos(proteinas, "listado-proteinas");
         insertarProductos(creatinas, "listado-creatinas");
         insertarProductos(shakers, "listado-shakers");
-    
+        console.log("insertados-------------------------");
         proteinas.forEach(proteina => crearEscuchadorBotonAgregar(proteina.nombre));
         shakers.forEach(shaker => crearEscuchadorBotonAgregar(shaker.nombre));
         creatinas.forEach(creatina => crearEscuchadorBotonAgregar(creatina.nombre));

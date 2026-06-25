@@ -48,7 +48,7 @@ function mostrarProductos(array, id) {
         const stringZona = arrayzona.join("");
         zona.innerHTML = stringZona;
         array.forEach(producto=>{
-            if(producto.activo===0){
+        if(producto.activo===0){
                 activarProducto(producto.id);  
             }
         });
@@ -56,12 +56,23 @@ function mostrarProductos(array, id) {
             modificarProducto(producto);  
         });
     }
+
+function mostrarError(mensaje){
+    const zonaProductos=document.getElementById("productos");
+    zonaProductos.innerHTML=`<p id="mensajeError">${mensaje}</p>`;
+}
+
+
 async function mostrarDatosBase() {
+    const urlBase="http://localhost:3000/api/productos/mostrar-admin";
     try {
-        const response = await fetch("http://localhost:3000/api/productos");
+        const response = await fetch(urlBase);
         const data = await response.json();
+        if(!response.ok){
+            mostrarError(data.mensaje);
+        }
         const productos = data.payload;
-        mostrarProductos(productos, "listado-productos");
+        mostrarProductos(productos, "productos");
         
     } catch (error) {
         console.log(error);
