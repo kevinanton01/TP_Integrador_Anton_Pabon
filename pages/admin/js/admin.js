@@ -3,15 +3,20 @@ function activarProducto(idProducto){
     const objetoActivar={"id": idProducto};
     boton.addEventListener("click",async ()=>{
         console.log("editando boton--------------------------");
-        const response= await fetch(`http://localhost:3000/api/activar-productos`,{
-            method : "PUT",
-            headers : {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(objetoActivar)
-        })
-        const data=await response.json();
-        console.log(data);
+        try {
+            const response= await fetch(`http://localhost:3000/api/activar-productos`,{
+                method : "PUT",
+                headers : {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(objetoActivar)
+            })
+            const data=await response.json();
+            console.log(data);
+            
+        } catch (error) {
+            console.log(error);
+        }
     });
 
 }
@@ -52,13 +57,18 @@ function mostrarProductos(array, id) {
         });
     }
 async function mostrarDatosBase() {
-    const response = await fetch("http://localhost:3000/api/productos");
-    const data = await response.json();
-    const productos = data.payload;
+    try {
+        const response = await fetch("http://localhost:3000/api/productos");
+        const data = await response.json();
+        const productos = data.payload;
+        mostrarProductos(productos, "listado-productos");
+        
+    } catch (error) {
+        console.log(error);
+    }
 
 
 
-    mostrarProductos(productos, "listado-productos");
 
 
 }

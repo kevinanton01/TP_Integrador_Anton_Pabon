@@ -62,25 +62,31 @@ async function mostrarDatosBase(){
         });
     }
 
-    const response= await fetch("http://localhost:3000/api/productos");
-    const data= await response.json();
-    
-    let productos=data.payload;
-    let proteinas = productos.filter(producto => producto.categoria === "proteina");
-    let creatinas = productos.filter(producto => producto.categoria === "creatina");
-    let shakers = productos.filter(producto => producto.categoria === "shaker");
 
-    insertarProductos(proteinas, "listado-proteinas");
-    insertarProductos(creatinas, "listado-creatinas");
-    insertarProductos(shakers, "listado-shakers");
-
-    proteinas.forEach(proteina => crearEscuchadorBotonAgregar(proteina.nombre));
-    shakers.forEach(shaker => crearEscuchadorBotonAgregar(shaker.nombre));
-    creatinas.forEach(creatina => crearEscuchadorBotonAgregar(creatina.nombre));
+    try {
+        
+        const response= await fetch("http://localhost:3000/api/productos");
+        const data= await response.json();
+        
+        let productos=data.payload;
+        let proteinas = productos.filter(producto => producto.categoria === "proteina");
+        let creatinas = productos.filter(producto => producto.categoria === "creatina");
+        let shakers = productos.filter(producto => producto.categoria === "shaker");
     
-    proteinas.forEach(proteina => crearEscuchadorBotonBorrar(proteina.nombre));
-    shakers.forEach(shaker => crearEscuchadorBotonBorrar(shaker.nombre));
-    creatinas.forEach(creatina => crearEscuchadorBotonBorrar(creatina.nombre));
+        insertarProductos(proteinas, "listado-proteinas");
+        insertarProductos(creatinas, "listado-creatinas");
+        insertarProductos(shakers, "listado-shakers");
+    
+        proteinas.forEach(proteina => crearEscuchadorBotonAgregar(proteina.nombre));
+        shakers.forEach(shaker => crearEscuchadorBotonAgregar(shaker.nombre));
+        creatinas.forEach(creatina => crearEscuchadorBotonAgregar(creatina.nombre));
+        
+        proteinas.forEach(proteina => crearEscuchadorBotonBorrar(proteina.nombre));
+        shakers.forEach(shaker => crearEscuchadorBotonBorrar(shaker.nombre));
+        creatinas.forEach(creatina => crearEscuchadorBotonBorrar(creatina.nombre));
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 mostrarDatosBase();

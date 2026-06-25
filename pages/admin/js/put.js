@@ -52,15 +52,20 @@ function CrearEscuchadorSubmit(producto){
         const objetoProducto=Object.fromEntries(datosForm.entries());
         
         const objetoEnviar={"productoViejo":producto,"productoNuevo":objetoProducto};
-        const response= await fetch(`http://localhost:3000/api/modificar-producto`,{
-            method:"PUT",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify(objetoEnviar)
-        });
-        const data=await response.json();
-        const alerta=alert(data.mensaje);
+        try {
+            const response= await fetch(`http://localhost:3000/api/modificar-producto`,{
+                method:"PUT",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(objetoEnviar)
+            });
+            const data=await response.json();
+            const alerta=alert(data.mensaje);
+            
+        } catch (error) {
+            console.log(error);
+        }
         window.location.href="admin.html";
     });
 
