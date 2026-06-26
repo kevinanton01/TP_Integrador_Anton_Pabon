@@ -58,7 +58,7 @@ function mostrarProductos(array, id) {
     }
 
 function mostrarError(mensaje){
-    const zonaProductos=document.getElementById("productos");
+    const zonaProductos=document.getElementById("zona-productos");
     zonaProductos.innerHTML=`<p id="mensajeError">${mensaje}</p>`;
 }
 
@@ -68,14 +68,17 @@ async function mostrarDatosBase() {
     try {
         const response = await fetch(urlBase);
         const data = await response.json();
+        //aca este if da false si response.ok contiene un codigo de estado entre 200 y 299 y da true cuando tira otro codigo de estado entonces al entrar al if va a mostrar el mensaje de error y no va a ejecutar el codigo de abajo por el return y termina la funcion en el return
         if(!response.ok){
             mostrarError(data.mensaje);
+            return;
         }
         const productos = data.payload;
-        mostrarProductos(productos, "productos");
+        mostrarProductos(productos, "zona-productos");
         
     } catch (error) {
         console.log(error);
+        mostrarError("Error de conexion con el servidor");
     }
 
 

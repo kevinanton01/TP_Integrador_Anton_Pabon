@@ -4,8 +4,60 @@ import environments from "./src/api/config/environments.js";
 import cors from "cors";
 const app=express();
 const port=parseInt(environments.port);
+//middleware de de aplicacion(middlewares que se ejecutan en todas las solicitudes)
 app.use(cors());
 app.use(express.json());
+//middleware de ruta(middlewares que solo se aplican en algunos endpoints no en todos)
+//los middleware de ruta se usan en algunas rutas y en otras no
+const validarId=(req,res,next)=>{
+    const id=Number(req.params.id);
+    //entra al if si id no es un entero o si id es menor o igual a cero
+    if(!Number.isInteger(id) || id<=0){
+        return res.status(400).json({
+            mensaje: "el id debe ser un numero entero positivo"
+        });
+        //aca al objeto req le creamos una clave id con el valor del id 
+        
+    }
+    req.id=id;
+    next();
+}
+
+//middleware de ruta para validar los campos de un formulario(no validamos las imagenes)
+const categoriasValidas=["proteina","creatina","shaker"]
+const validarCampos=(req,res,next)=>{
+    const {nombre,imagen,categoria,precio}=req.body; //recogemos los datos del body
+    let errores=[];         //creamos un array vacio que va a contener errores
+    //validamos los datos ingresados en el formulario
+    if(!nombre || !imagen || !categoria || !precio){
+        errores.push("Asegurate de llenar todos los campos");    
+    }
+    if(typeof nombre !== "string" || nombre.trim().length < 2){
+        errores.push("el nombre debe tener al menos dos caracteres");    
+    }
+    //el precio lo parsearemos previamente en el cliente
+    if(typeof precio !== "number" || precio<=0){
+        errores.push("el precio debe ser un numero mayor a cero");
+    }
+    //no validaremos imagen porque luego usaremos multer
+    if(!categoriasValidas.includes(categoria)){
+        errores.push("categoria invalida");
+    }
+
+    //ahora detectamos si existe algun error en el array error y de haber algun error en el array devolvemos un estado 400
+    if(errores.length>0){
+        return res.status(400).json({
+                mensaje:"Datos invalidos",
+                errores: errores
+            }); 
+
+    }
+
+
+    next();
+
+
+}
 
 app.get("/api/productos",async (req,res)=>{
     //optimizacion 3: extraemos la consulta sql en una variable y le quitamos el select * para evitar poner columnas innecesarias
@@ -34,7 +86,7 @@ app.get("/api/productos",async (req,res)=>{
 
 app.get("/api/productos/mostrar-admin",async (req,res)=>{
     //optimizacion 3: extraemos la consulta sql en una variable y le quitamos el select * para evitar poner columnas innecesarias
-    const sql="SELECT id,imagen,nombre,categoria,precio,activo FROM productoss";
+    const sql="SELECT id,imagen,nombre,categoria,precio,activo FROM productos";
     //optimizacion 1: manejar errores con try catch
     try {
         const [rows] =await connection.query(sql);
@@ -58,51 +110,79 @@ app.get("/api/productos/mostrar-admin",async (req,res)=>{
 
 
 
+app.get("/api/productos/:id",validarId,async (req,res)=>{
+    
+    //optimizacion 1 manejamos errores con try catch
+    try {
+        //aplicamos la optimizacion 3
+        const sql="SELECT id,imagen,nombre,categoria,precio FROM productos WHERE productos.id = ?"
+        //gracias al middleware validarId valido el id que escribimos en la ruta y lo guardo en req.id
+        const [rows] = await connection.query(sql, [req.id]);
+        //optimizacion 4: devolvemos error 404 si no hay productos en rows
+        if(rows.length===0){
+            return res.status(404).json({
+                mensaje: `no se encontraron productos con id ${req.id}`
+            });
+        }
 
 
-/*
-app.get("/api/ventas-productos",async (req,res)=>{
-    const [rows] =await connection.query("SELECT productos.id,productos.nombre,productos.imagen,productos.categoria,productos.precio,productos.activo  FROM productos JOIN ventas_productos ON productos.id = ventas_productos.id_producto");
-    res.status(200).json(
-        {payload: rows}
-    );
+
+        res.status(200).json(
+            {payload: rows}
+        );
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+        mensaje: "error interno del servidor al obtener productos"
+        });
+    }
 });
 
-app.get("/api/ventas-productos/:id",async (req,res)=>{
-    const id = req.params.id;
-    const [rows] = await connection.query("SELECT * FROM productos where productos.id = ?", [id]);
-    res.status(200).json(
-        {payload: rows}
-    );
-});*/
 
-app.get("/api/productos/:id",async (req,res)=>{
-    const id = req.params.id;
-    const [rows] = await connection.query("SELECT * FROM productos where productos.id = ?", [id]);
-    res.status(200).json(
-        {payload: rows}
-    );
-});
-
-
-app.post("/api/productos",async (req,res)=>{
+app.post("/api/productos",validarCampos,async (req,res)=>{
+    //optimizacion 1: agregamos manejo de errores con try catch
     const producto=req.body;
+    //optimizacion 3: sanitizamos los strings antes de insertarlos
+    const cleanName=producto.nombre.trim();
+    const sql=`INSERT INTO productos(nombre,categoria,precio,imagen,activo) VALUES(?,?,?,?,?)`;
+    try {
+        const [rows]=await connection.query(sql,[cleanName,producto.categoria,producto.precio,producto.imagen,true]);
+        //optimizacion 4: vamos a almacenar en rows el id del nuevo producto
+        res.status(200).json(
+            {mensaje: "producto creado con exito",
+            productId: rows.insertId  //id del producto insertado 
+            
+            }
+        );
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+        mensaje: "error interno del servidor al crear productos"
+        });
+    }
 
-    await connection.query(`INSERT INTO productos(nombre,categoria,precio,imagen,activo)
-    VALUES("${producto.nombre}","${producto.categoria}",${producto.precio},"${producto.imagen}",TRUE)`);
-    res.status(200).json(
-        {mensaje: "producto creado con exito"}
-    );
 });
 
-app.put("/api/productos",async (req,res)=>{
-    const id=req.body.id;
+app.put("/api/productos/:id",validarId,async (req,res)=>{
+    
     const sql="UPDATE productos SET activo=0 where id=?"
+    //optimizacion 1: incorporamos manejo de errores con try catch
+    //el middleware de ruta validarId ya valida el id que se paso en la ruta  y lo guarda en req.id
+    try {
+        await connection.query(sql,[req.id]);
+        res.status(200).json(
+            {mensaje: `Producto con id ${req.id} se ha eliminado correctamente`}
+        );
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+        mensaje: "error interno del servidor al eliminar productos"
+        });
+    }
 
-    await connection.query(sql,[id]);
-    res.status(200).json(
-        {mensaje: "producto borrado con exito"}
-    );
 });
 
 app.put("/api/activar-productos",async (req,res)=>{

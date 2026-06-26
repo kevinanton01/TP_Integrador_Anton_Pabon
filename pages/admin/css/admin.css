@@ -85,7 +85,7 @@ body {
     text-align: center;
 }
 
-#productos {
+#zona-productos {
     display: flex;
     justify-content: center;
     gap: 10px;

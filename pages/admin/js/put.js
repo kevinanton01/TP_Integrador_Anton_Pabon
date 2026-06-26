@@ -1,3 +1,7 @@
+function mostrarMensaje(tipo,mensaje){ 
+    const zonaProductos=document.getElementById("seccion-productos");
+    zonaProductos.innerHTML=`<p id="mensaje-${tipo}">${mensaje}</p>`;
+}
 
 function mostrarPantallaProductoModificar(){
     const seccionformulario= document.getElementById("mostrar-formulario");
@@ -46,6 +50,7 @@ mostrarPantallaProductoModificar();
 
 function CrearEscuchadorSubmit(producto){
     const formulario=document.getElementById("mostrar-formulario");
+    const urlBase=`http://localhost:3000/api/modificar-producto`;
     formulario.addEventListener("submit",async(event)=>{
         event.preventDefault();
         const datosForm=new FormData(event.target);
@@ -53,7 +58,7 @@ function CrearEscuchadorSubmit(producto){
         
         const objetoEnviar={"productoViejo":producto,"productoNuevo":objetoProducto};
         try {
-            const response= await fetch(`http://localhost:3000/api/modificar-producto`,{
+            const response= await fetch(urlBase,{
                 method:"PUT",
                 headers:{
                     "Content-Type":"application/json"
