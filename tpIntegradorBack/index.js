@@ -26,7 +26,9 @@ const validarId=(req,res,next)=>{
 //middleware de ruta para validar los campos de un formulario(no validamos las imagenes)
 const categoriasValidas=["proteina","creatina","shaker"]
 const validarCampos=(req,res,next)=>{
-    const {nombre,imagen,categoria,precio}=req.body; //recogemos los datos del body
+    console.log(req.body); // ← agregá esto
+    console.log(typeof req.body.precio); // ← y esto
+    const {nombre,imagen,categoria,precio}=req.body.productoNuevo; //recogemos los datos del body
     let errores=[];         //creamos un array vacio que va a contener errores
     //validamos los datos ingresados en el formulario
     if(!nombre || !imagen || !categoria || !precio){
@@ -149,8 +151,9 @@ app.post("/api/productos",validarCampos,async (req,res)=>{
     try {
         const [rows]=await connection.query(sql,[cleanName,producto.categoria,producto.precio,producto.imagen,true]);
         //optimizacion 4: vamos a almacenar en rows el id del nuevo producto
-        res.status(200).json(
-            {mensaje: "producto creado con exito",
+        //optimizacion 5: en lugar de devolver un codigo de estado 200 corresponde devolver el codigo de estado 201
+        res.status(201).json(
+            {mensaje: `producto creado con exito con id ${rows.insertId}`,
             productId: rows.insertId  //id del producto insertado 
             
             }
@@ -195,15 +198,31 @@ app.put("/api/activar-productos",async (req,res)=>{
     );
 });
 
-app.put("/api/modificar-producto",async (req,res)=>{
+app.put("/api/modificar-producto",validarCampos,async (req,res)=>{
     const idAnterior=req.body.productoViejo.id;
     const objetoNuevo=req.body.productoNuevo;
-    const sql="UPDATE productos SET id=?,nombre=?,categoria=?,precio=?,imagen=? where id=?"
-
-    await connection.query(sql,[objetoNuevo.id,objetoNuevo.nombre,objetoNuevo.categoria,objetoNuevo.precio,objetoNuevo.imagen,idAnterior]);
-    res.status(200).json(
-        {mensaje: "producto modificado con exito"}
-    );
+    const sql="UPDATE productos SET nombre=?,categoria=?,precio=?,imagen=? where id=?";
+    //optimizacion 1: agregamos manejo de errores con try catch
+    try {
+        const [rows]=await connection.query(sql,[objetoNuevo.nombre,objetoNuevo.categoria,objetoNuevo.precio,objetoNuevo.imagen,idAnterior]);
+        //optimizacion 2: verificamos si realmente se actualizo algo porque podemos darle a enviar y no actualizamos nada no cambiamos ningun campo
+        if(rows.affectedRows===0){
+            return res.status(404).json({
+                mensaje: "no se actualizo el producto"
+            });
+        }
+        
+        res.status(200).json(
+            {mensaje: "producto modificado con exito"}
+        );
+        
+    } catch (error) {
+        console.log(error);
+        //optimizacion 3: devolvemos errores 500
+        res.status(500).json({
+            mensaje: "error interno del servidor al modificar productos"
+        });
+    }
 });
 
 

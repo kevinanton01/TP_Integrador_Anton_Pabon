@@ -1,4 +1,4 @@
-function activarProducto(idProducto){
+/*function activarProducto(idProducto){
     const boton=document.getElementById("btn-activar-"+idProducto);
     const objetoActivar={"id": idProducto};
     boton.addEventListener("click",async ()=>{
@@ -19,7 +19,7 @@ function activarProducto(idProducto){
         }
     });
 
-}
+}*/
 
 function modificarProducto(producto){
     const boton=document.getElementById("btn-modificar-"+producto.id);
@@ -30,10 +30,48 @@ function modificarProducto(producto){
 
 }
 
+function crearEscuchadorBotonActivar(producto){
+    const boton=document.getElementById("btn-activar-"+producto.id);
+    const contenedor=document.getElementById("contenedor-"+producto.id);
+    const objetoActivar={"id": producto.id};
+    const urlBase=`http://localhost:3000/api/activar-productos`;
+    boton.addEventListener("click",async ()=>{
+
+        try {
+            const response= await fetch(urlBase,{
+                method : "PUT",
+                headers : {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(objetoActivar)
+            })
+            const data=await response.json();
+            console.log(data);
+            
+        } catch (error) {
+            console.log(error);
+        }
+        
+        contenedor.innerHTML=`<div class="contenedor-imagen">
+            <img src="${producto.imagen}" alt="${producto.nombre}" class="img-producto">
+            </div>
+            <p class="nombre-producto">${producto.nombre}</p>
+            <p class="id-producto">ID: ${producto.id}</p>
+            <p class="precio-producto">$${producto.precio}</p>
+            <p class="texto-estado">Estado: activo</p>
+            <button id="btn-modificar-${producto.id}" >Modificar producto</button>`;
+        
+        modificarProducto(producto); 
+        
+        
+        
+    });
+}
+
 function mostrarProductos(array, id) {
     const zona = document.getElementById(id);
     let arrayzona = array.map(producto => `
-        <div class="productos">
+        <div class="productos" id="contenedor-${producto.id}">
             <div class="contenedor-imagen">
                 <img src="${producto.imagen}" alt="${producto.nombre}" class="img-producto">
             </div>
@@ -48,9 +86,12 @@ function mostrarProductos(array, id) {
         const stringZona = arrayzona.join("");
         zona.innerHTML = stringZona;
         array.forEach(producto=>{
-        if(producto.activo===0){
-                activarProducto(producto.id);  
-            }
+            if(producto.activo===0){
+                    
+                    //activarProducto(producto.id);
+                    crearEscuchadorBotonActivar(producto);
+
+                }
         });
         array.forEach(producto=>{
             modificarProducto(producto);  

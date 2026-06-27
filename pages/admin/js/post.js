@@ -34,8 +34,10 @@ function subirDatos(){
         objetojs.precio=Number(objetojs.precio);
         //optimizacion 4: llamamos a la funcion para validar los datos del formulario
         const errores= validarFormulario(objetojs);
+        //si hay errores mostramos mensaje de error y terminamos aca
         if(errores.length>0){
-            mostrarMensaje("error",errores.join())
+            mostrarMensaje("error",errores.join(" ")) 
+            return;
         }
         try {
             const response=await fetch(urlBase,{
@@ -49,11 +51,28 @@ function subirDatos(){
             const data=await response.json();
     
             console.log(data);
+            //optimizacion 5: manejamos respuestas no ok del servidor(que no esten entre 200 y 299)
+        
+            if (!response.ok) {
+                
+                if (data.errores) {
+                    mostrarListaErrores(data.errores);
+                    return;
+                }
 
+                mostrarMensaje("error", data.mensaje);
+                return;
+            }
+
+            // En caso de exito, mostramos los siguientes mensajes
+            mostrarMensaje("exito", data.mensaje);
+            console.log(data.mensaje);
             
             
         } catch (error) {
-            console.log(error);
+            
+            console.error("Error al enviar los datos ", error);
+            mostrarMensaje("error", "Error al procesar la solicitud");
         }
     })
 
