@@ -7,7 +7,7 @@ function mostrarMensaje(tipo,mensaje){
 
 function crearEscuchadorBotonBorrar(id,producto){
     const boton=document.getElementById(id);
-    const urlBase=`http://localhost:3000/api/productos/${producto.id}`
+    const urlBase=`http://localhost:3000/api/productos/buscar-eliminar/${producto.id}`
     boton.addEventListener("click",async ()=>{
         const pregunta= prompt("estas seguro que deseas borrar este producto?");
         if(pregunta==="si"){

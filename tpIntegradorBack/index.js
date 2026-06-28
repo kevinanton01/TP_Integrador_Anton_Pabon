@@ -172,7 +172,7 @@ app.post("/api/productos",validarCampos,async (req,res)=>{
 
 });
 
-app.put("/api/productos/:id",validarId,async (req,res)=>{
+app.put("/api/productos/buscar-eliminar/:id",validarId,async (req,res)=>{
     
     const sql="UPDATE productos SET activo=0 where id=?"
     //optimizacion 1: incorporamos manejo de errores con try catch
@@ -192,7 +192,7 @@ app.put("/api/productos/:id",validarId,async (req,res)=>{
 
 });
 
-app.put("/api/activar-productos",async (req,res)=>{
+app.put("/api/productos/activar-productos",async (req,res)=>{
     const id=req.body.id;
     const sql="UPDATE productos SET activo=1 where id=?"
 
@@ -202,7 +202,7 @@ app.put("/api/activar-productos",async (req,res)=>{
     );
 });
 
-app.put("/api/modificar-producto",validarCampos,async (req,res)=>{
+app.put("/api/productos/modificar-producto",validarCampos,async (req,res)=>{
     
     const datosIngresados=req.body;
     const sql="UPDATE productos SET nombre=?,categoria=?,precio=?,imagen=?,activo=? where id=?";

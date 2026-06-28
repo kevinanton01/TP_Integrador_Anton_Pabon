@@ -13,7 +13,7 @@ function crearEscuchadorBotonActivar(producto){
     const boton=document.getElementById("btn-activar-"+producto.id);
     const contenedor=document.getElementById("contenedor-"+producto.id);
     const objetoActivar={"id": producto.id};
-    const urlBase=`http://localhost:3000/api/activar-productos`;
+    const urlBase=`http://localhost:3000/api/productos/activar-productos`;
     boton.addEventListener("click",async ()=>{
 
         try {

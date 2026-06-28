@@ -103,7 +103,7 @@ function CrearEscuchadorSubmit(){
     const seccionFormulario=document.getElementById("seccion-formulario");
     const seccionProducto=document.getElementById("seccion-producto");
     const formulario=document.getElementById("mostrar-formulario");
-    const urlBase=`http://localhost:3000/api/modificar-producto`;
+    const urlBase=`http://localhost:3000/api/productos/modificar-producto`;
     formulario.addEventListener("submit",async(event)=>{
         event.preventDefault();
         const datosForm=new FormData(event.target);
