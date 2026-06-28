@@ -1,5 +1,5 @@
 import productModels from "../models/product.models.js";
-import ProductModels from "../models/product.models.js";
+
 
 export const getAllProducts = async (req,res)=>{
     //optimizacion 1: manejar errores con try catch
@@ -52,7 +52,7 @@ export const getProductById = async (req,res)=>{
     try {
         
         //gracias al middleware validarId valido el id que escribimos en la ruta y lo guardo en req.id
-        const [rows] = await productModels.selectProductById();
+        const [rows] = await productModels.selectProductById(req.id);
         //optimizacion 4: devolvemos error 404 si no hay productos en rows
         if(rows.length===0){
             return res.status(404).json({
@@ -78,9 +78,9 @@ export const createProduct = async (req,res)=>{
     const producto=req.body;
     //optimizacion 3: sanitizamos los strings antes de insertarlos
     const cleanName=producto.nombre.trim();
-    const sql=`INSERT INTO productos(nombre,categoria,precio,imagen,activo) VALUES(?,?,?,?,?)`;
+    
     try {
-        const [rows]=await productModels.generateProduct();
+        const [rows]=await productModels.generateProduct(cleanName,producto.imagen,producto.precio,producto.categoria,producto.activo);
         //optimizacion 4: vamos a almacenar en rows el id del nuevo producto
         //optimizacion 5: en lugar de devolver un codigo de estado 200 corresponde devolver el codigo de estado 201
         res.status(201).json(
@@ -103,7 +103,7 @@ export const removeProduct = async (req,res)=>{
     //optimizacion 1: incorporamos manejo de errores con try catch
     //el middleware de ruta validarId ya valida el id que se paso en la ruta  y lo guarda en req.id
     try {
-        await productModels.deleteProduct();
+        await productModels.deleteProduct(req.id);
         res.status(200).json(
             {mensaje: `Producto con id ${req.id} se ha eliminado correctamente`}
         );
@@ -120,7 +120,7 @@ export const removeProduct = async (req,res)=>{
 export const activeProduct = async (req,res)=>{
     const id=req.body.id;
 
-    await productModels.enableProduct();
+    await productModels.enableProduct(id);
     res.status(200).json(
         {mensaje: "producto activado con exito"}
     );
@@ -132,7 +132,7 @@ export const modifyProduct = async (req,res)=>{
     const datosIngresados=req.body;
     //optimizacion 1: agregamos manejo de errores con try catch
     try {
-        const [rows]=await productModels.editProduct();
+        const [rows]=await productModels.editProduct(datosIngresados.nombre,datosIngresados.categoria,datosIngresados.precio,datosIngresados.imagen,datosIngresados.activo,datosIngresados.id);
         //optimizacion 2: verificamos si realmente se actualizo algo porque podemos darle a enviar y no actualizamos nada no cambiamos ningun campo
         if(rows.affectedRows===0){
             return res.status(404).json({

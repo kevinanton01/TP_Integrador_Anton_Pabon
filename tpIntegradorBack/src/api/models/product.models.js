@@ -29,10 +29,10 @@ const selectProductById = (id) => {
 
 
 ////////////////////
-const generateProduct = (nombre, imagen, precio, categoria) => {
-    let sql = `UPDATE products SET nombre = ?, imagen = ?, precio = ?, categoria = ? WHERE id = ?`;
+const generateProduct = (nombre, imagen, precio, categoria,activo) => {
+   const sql=`INSERT INTO productos(nombre,categoria,precio,imagen,activo) VALUES(?,?,?,?,?)`;
     
-    return connection.query(sql, [nombre, imagen, precio, categoria]); 
+    return connection.query(sql, [nombre, categoria, precio, imagen,true]); 
 }
 
 

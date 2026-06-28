@@ -1,10 +1,11 @@
 import { Router } from "express";
+import { validarCampos,validarId } from "../middlewares/middlewares.js";
 import { getAllProducts, getAllProductsAdmin, getProductById, createProduct, removeProduct, activeProduct, modifyProduct} from "../controllers/product.controllers.js";
 const router = Router();
 
-router.get("/api/productos", getAllProducts);
+router.get("/", getAllProducts);
 
-router.get("/api/productos/mostrar-admin", getAllProductsAdmin);
+router.get("/mostrar-admin", getAllProductsAdmin);
 
 router.get("/:id",validarId, getProductById);
 
