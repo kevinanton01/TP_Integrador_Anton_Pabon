@@ -1,9 +1,15 @@
+import { productRoutes } from "./src/api/routes/index.js";
+
 import express from "express";
 import connection from "./src/api/database/db.js";
 import environments from "./src/api/config/environments.js";
 import cors from "cors";
 const app=express();
 const port=parseInt(environments.port);
+
+
+////////////////////
+// Middlewares
 //middleware de de aplicacion(middlewares que se ejecutan en todas las solicitudes)
 app.use(cors());
 app.use(express.json());
@@ -63,171 +69,11 @@ const validarCampos=(req,res,next)=>{
 
 }
 
+////////////////////
+// Endpoints
 
+app.use("/api/products", productRoutes);
 
-app.get("/api/productos",async (req,res)=>{
-    //optimizacion 3: extraemos la consulta sql en una variable y le quitamos el select * para evitar poner columnas innecesarias
-    const sql="SELECT id,imagen,nombre,categoria,precio FROM productos WHERE activo=1";
-    //optimizacion 1: manejar errores con try catch
-    try {
-        const [rows] =await connection.query(sql);
-        //optimizacion 4: devolvemos error 404 si no hay productos
-        if(rows.length===0){
-            return res.status(404).json({
-                mensaje: "no se encontraron productos"
-            });
-        }
-        res.status(200).json(
-            {payload: rows}
-        );
-        
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            mensaje: "error interno del servidor al obtener productos"
-        });
-    }
-});
-
-
-app.get("/api/productos/mostrar-admin",async (req,res)=>{
-    //optimizacion 3: extraemos la consulta sql en una variable y le quitamos el select * para evitar poner columnas innecesarias
-    const sql="SELECT id,imagen,nombre,categoria,precio,activo FROM productos";
-    //optimizacion 1: manejar errores con try catch
-    try {
-        const [rows] =await connection.query(sql);
-        //optimizacion 4: devolvemos error 404 si no hay productos
-        if(rows.length===0){
-            return res.status(404).json({
-                mensaje: "no se encontraron productos"
-            });
-        }
-        res.status(200).json(
-            {payload: rows}
-        );
-        
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            mensaje: "error interno del servidor al obtener productos"
-        });
-    }
-});
-
-
-
-app.get("/api/productos/:id",validarId,async (req,res)=>{
-    
-    //optimizacion 1 manejamos errores con try catch
-    try {
-        //aplicamos la optimizacion 3
-        const sql="SELECT id,imagen,nombre,categoria,precio FROM productos WHERE productos.id = ?"
-        //gracias al middleware validarId valido el id que escribimos en la ruta y lo guardo en req.id
-        const [rows] = await connection.query(sql, [req.id]);
-        //optimizacion 4: devolvemos error 404 si no hay productos en rows
-        if(rows.length===0){
-            return res.status(404).json({
-                mensaje: `no se encontraron productos con id ${req.id}`
-            });
-        }
-
-
-
-        res.status(200).json(
-            {payload: rows}
-        );
-        
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-        mensaje: "error interno del servidor al obtener productos"
-        });
-    }
-});
-
-
-app.post("/api/productos",validarCampos,async (req,res)=>{
-    //optimizacion 1: agregamos manejo de errores con try catch
-    const producto=req.body;
-    //optimizacion 3: sanitizamos los strings antes de insertarlos
-    const cleanName=producto.nombre.trim();
-    const sql=`INSERT INTO productos(nombre,categoria,precio,imagen,activo) VALUES(?,?,?,?,?)`;
-    try {
-        const [rows]=await connection.query(sql,[cleanName,producto.categoria,producto.precio,producto.imagen,true]);
-        //optimizacion 4: vamos a almacenar en rows el id del nuevo producto
-        //optimizacion 5: en lugar de devolver un codigo de estado 200 corresponde devolver el codigo de estado 201
-        res.status(201).json(
-            {mensaje: `producto creado con exito con id ${rows.insertId}`,
-            productId: rows.insertId  //id del producto insertado 
-            
-            }
-        );
-        
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-        mensaje: "error interno del servidor al crear productos"
-        });
-    }
-
-});
-
-app.put("/api/productos/buscar-eliminar/:id",validarId,async (req,res)=>{
-    
-    const sql="UPDATE productos SET activo=0 where id=?"
-    //optimizacion 1: incorporamos manejo de errores con try catch
-    //el middleware de ruta validarId ya valida el id que se paso en la ruta  y lo guarda en req.id
-    try {
-        await connection.query(sql,[req.id]);
-        res.status(200).json(
-            {mensaje: `Producto con id ${req.id} se ha eliminado correctamente`}
-        );
-        
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-        mensaje: "error interno del servidor al eliminar productos"
-        });
-    }
-
-});
-
-app.put("/api/productos/activar-productos",async (req,res)=>{
-    const id=req.body.id;
-    const sql="UPDATE productos SET activo=1 where id=?"
-
-    await connection.query(sql,[id]);
-    res.status(200).json(
-        {mensaje: "producto activado con exito"}
-    );
-});
-
-app.put("/api/productos/modificar-producto",validarCampos,async (req,res)=>{
-    
-    const datosIngresados=req.body;
-    const sql="UPDATE productos SET nombre=?,categoria=?,precio=?,imagen=?,activo=? where id=?";
-    //optimizacion 1: agregamos manejo de errores con try catch
-    try {
-        const [rows]=await connection.query(sql,[datosIngresados.nombre,datosIngresados.categoria,datosIngresados.precio,datosIngresados.imagen,datosIngresados.activo,datosIngresados.id]);
-        //optimizacion 2: verificamos si realmente se actualizo algo porque podemos darle a enviar y no actualizamos nada no cambiamos ningun campo
-        if(rows.affectedRows===0){
-            return res.status(404).json({
-                mensaje: "no se actualizo el producto"
-            });
-        }
-        
-        res.status(200).json(
-            {mensaje: "producto modificado con exito"}
-        );
-        
-    } catch (error) {
-        console.log(error);
-        //optimizacion 3: devolvemos errores 500
-        res.status(500).json({
-            mensaje: "error interno del servidor al modificar productos"
-        });
-    }
-});
 
 
 
