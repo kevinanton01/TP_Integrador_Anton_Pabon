@@ -7,6 +7,9 @@ const port=parseInt(environments.port);
 //middleware de de aplicacion(middlewares que se ejecutan en todas las solicitudes)
 app.use(cors());
 app.use(express.json());
+
+
+
 //middleware de ruta(middlewares que solo se aplican en algunos endpoints no en todos)
 //los middleware de ruta se usan en algunas rutas y en otras no
 const validarId=(req,res,next)=>{
@@ -59,6 +62,8 @@ const validarCampos=(req,res,next)=>{
 
 
 }
+
+
 
 app.get("/api/productos",async (req,res)=>{
     //optimizacion 3: extraemos la consulta sql en una variable y le quitamos el select * para evitar poner columnas innecesarias
