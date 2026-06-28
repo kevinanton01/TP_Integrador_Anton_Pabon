@@ -26,9 +26,8 @@ const validarId=(req,res,next)=>{
 //middleware de ruta para validar los campos de un formulario(no validamos las imagenes)
 const categoriasValidas=["proteina","creatina","shaker"]
 const validarCampos=(req,res,next)=>{
-    console.log(req.body); // ← agregá esto
-    console.log(typeof req.body.precio); // ← y esto
-    const {nombre,imagen,categoria,precio}=req.body.productoNuevo; //recogemos los datos del body
+   
+    const {nombre,imagen,categoria,precio}=req.body; //recogemos los datos del body        
     let errores=[];         //creamos un array vacio que va a contener errores
     //validamos los datos ingresados en el formulario
     if(!nombre || !imagen || !categoria || !precio){
@@ -199,12 +198,12 @@ app.put("/api/activar-productos",async (req,res)=>{
 });
 
 app.put("/api/modificar-producto",validarCampos,async (req,res)=>{
-    const idAnterior=req.body.productoViejo.id;
-    const objetoNuevo=req.body.productoNuevo;
-    const sql="UPDATE productos SET nombre=?,categoria=?,precio=?,imagen=? where id=?";
+    
+    const datosIngresados=req.body;
+    const sql="UPDATE productos SET nombre=?,categoria=?,precio=?,imagen=?,activo=? where id=?";
     //optimizacion 1: agregamos manejo de errores con try catch
     try {
-        const [rows]=await connection.query(sql,[objetoNuevo.nombre,objetoNuevo.categoria,objetoNuevo.precio,objetoNuevo.imagen,idAnterior]);
+        const [rows]=await connection.query(sql,[datosIngresados.nombre,datosIngresados.categoria,datosIngresados.precio,datosIngresados.imagen,datosIngresados.activo,datosIngresados.id]);
         //optimizacion 2: verificamos si realmente se actualizo algo porque podemos darle a enviar y no actualizamos nada no cambiamos ningun campo
         if(rows.affectedRows===0){
             return res.status(404).json({

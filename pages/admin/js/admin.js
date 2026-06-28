@@ -1,25 +1,4 @@
-/*function activarProducto(idProducto){
-    const boton=document.getElementById("btn-activar-"+idProducto);
-    const objetoActivar={"id": idProducto};
-    boton.addEventListener("click",async ()=>{
-        console.log("editando boton--------------------------");
-        try {
-            const response= await fetch(`http://localhost:3000/api/activar-productos`,{
-                method : "PUT",
-                headers : {
-                    "Content-Type":"application/json"
-                },
-                body: JSON.stringify(objetoActivar)
-            })
-            const data=await response.json();
-            console.log(data);
-            
-        } catch (error) {
-            console.log(error);
-        }
-    });
 
-}*/
 
 function modificarProducto(producto){
     const boton=document.getElementById("btn-modificar-"+producto.id);

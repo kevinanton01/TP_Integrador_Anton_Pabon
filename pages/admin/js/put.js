@@ -1,7 +1,7 @@
 //optimizacion 1:mostrar mensaje de exito o error visualmente
 function mostrarMensaje(tipo,mensaje){ 
     const zonaMensaje=document.getElementById("mensaje");
-    zonaProductos.innerHTML=`<p id="mensaje-${tipo}">${mensaje}</p>`;
+    zonaMensaje.innerHTML=`<p id="mensaje-${tipo}">${mensaje}</p>`;
 }
 
 function mostrarListaErrores(array) {
@@ -30,6 +30,7 @@ function mostrarPantallaProductoModificar(){
                
            </div>`;
         let htmlFormulario=  `
+            <input type="hidden" name="id" value="${productoExtraido.id}">
             <div>
             <label for="nombre" class="label">Ingrese un nuevo nombre:</label>
             <input type="text" name="nombre" id="nombre" value="${productoExtraido.nombre}" class="input">
@@ -72,11 +73,11 @@ function mostrarPantallaProductoModificar(){
             <label for="estado" class=label>Ingrese un nuevo estado:</label>
             <select name="estado" id="estado">`;
         if(productoExtraido.activo===1){
-            htmlFormulario +=`<option value="activo" selected>Activo</option>
-                <option value="inactivo">Inactivo</option>`;
+            htmlFormulario +=`<option value="1" selected>Activo</option>
+                <option value="0">Inactivo</option>`;
         }else{
-            htmlFormulario +=`<option value="activo">Activo</option>
-                <option value="inactivo" selected>Inactivo</option>`;
+            htmlFormulario +=`<option value="1">Activo</option>
+                <option value="0" selected>Inactivo</option>`;
         }
         htmlFormulario +=` </select>
             </div>
@@ -87,18 +88,18 @@ function mostrarPantallaProductoModificar(){
             
 
         seccionformulario.innerHTML=htmlFormulario;
-      
+        CrearEscuchadorSubmit();
 
     }else{
         mostrarMensaje("error","No se selecciono ningun producto para modificar");
     }
-    CrearEscuchadorSubmit(productoExtraido);
+    //CrearEscuchadorSubmit(productoExtraido);
 
 }
 
 mostrarPantallaProductoModificar();
 
-function CrearEscuchadorSubmit(producto){
+function CrearEscuchadorSubmit(){
     const seccionFormulario=document.getElementById("seccion-formulario");
     const seccionProducto=document.getElementById("seccion-producto");
     const formulario=document.getElementById("mostrar-formulario");
@@ -108,15 +109,16 @@ function CrearEscuchadorSubmit(producto){
         const datosForm=new FormData(event.target);
         const objetoProducto=Object.fromEntries(datosForm.entries());
         objetoProducto.precio=Number(objetoProducto.precio);
+        objetoProducto.activo=Number(objetoProducto.activo);
         
-        const objetoEnviar={"productoViejo":producto,"productoNuevo":objetoProducto};
+        
         try {
             const response= await fetch(urlBase,{
                 method:"PUT",
                 headers:{
                     "Content-Type":"application/json"
                 },
-                body:JSON.stringify(objetoEnviar)
+                body:JSON.stringify(objetoProducto)
             });
             const data=await response.json();
             //optimizacion: manejamos una respuesta cuyo codigo de estado no esta entre 200 y 299
