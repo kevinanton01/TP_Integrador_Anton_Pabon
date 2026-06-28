@@ -71,7 +71,7 @@ function mostrarPantallaProductoModificar(){
             </div>
             <div>
             <label for="estado" class=label>Ingrese un nuevo estado:</label>
-            <select name="estado" id="estado">`;
+            <select name="activo" id="activo">`;
         if(productoExtraido.activo===1){
             htmlFormulario +=`<option value="1" selected>Activo</option>
                 <option value="0">Inactivo</option>`;
