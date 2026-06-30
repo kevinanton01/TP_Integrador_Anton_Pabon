@@ -7,14 +7,14 @@ import { deleteView, getView, indexView, postView, putView } from "../controller
 import { requireLogin } from "../middlewares/middlewares.js";
 const router = Router();
 
-router.get("/index", /*requireLogin,*/ indexView);
+router.get("/index", requireLogin, indexView);
 
-router.get("/consultar",/* requireLogin,*/ getView);
+router.get("/consultar", requireLogin, getView);
 
-router.get("/crear"/*, requireLogin*/, postView);
+router.get("/crear", requireLogin, postView);
 
-router.get("/modificar"/*, requireLogin*/, putView);
+router.get("/modificar", requireLogin, putView);
 
-router.get("/eliminar"/*, requireLogin*/, deleteView)
+router.get("/eliminar", requireLogin, deleteView)
 
 export default router;

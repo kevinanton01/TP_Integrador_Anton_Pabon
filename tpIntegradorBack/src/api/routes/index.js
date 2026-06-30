@@ -3,11 +3,11 @@
 ========================*/
 import productRoutes from "./product.routes.js";
 import viewRoutes from "./view.routes.js";
-//import authRoutes from "./auth.routes.js";
+import authRoutes from "./auth.routes.js";
 
 // Centraliza todas las rutas y las exporta con un nombre
 export {
     productRoutes,
-    viewRoutes
-    //authRoutes
+    viewRoutes,
+    authRoutes
 }
