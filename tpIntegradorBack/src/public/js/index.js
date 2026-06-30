@@ -1,10 +1,8 @@
-
-
 function modificarProducto(producto){
     const boton=document.getElementById("btn-modificar-"+producto.id);
     boton.addEventListener("click",()=>{
         localStorage.setItem("producto",JSON.stringify(producto));
-        window.location.href="put.html";
+        window.location.href="/dashboard/modificar";
     });
 
 }
@@ -40,9 +38,7 @@ function crearEscuchadorBotonActivar(producto){
             <p class="texto-estado">Estado: activo</p>
             <button id="btn-modificar-${producto.id}" >Modificar producto</button>`;
         
-        modificarProducto(producto); 
-        
-        
+        modificarProducto(producto);    
         
     });
 }
@@ -82,7 +78,6 @@ function mostrarError(mensaje){
     zonaProductos.innerHTML=`<p id="mensajeError">${mensaje}</p>`;
 }
 
-
 async function mostrarDatosBase() {
     const urlBase="http://localhost:3000/api/productos/mostrar-admin";
     try {
@@ -100,16 +95,9 @@ async function mostrarDatosBase() {
         console.log(error);
         mostrarError("Error de conexion con el servidor");
     }
-
-
-
-
-
 }
 
 mostrarDatosBase();
-
-
 
 function irAInicio() {
     location.href = "";

@@ -1,0 +1,26 @@
+<!-- Aca incluimos los fragmentos del <head> y del <header> -->
+
+<%- include("partials/head.ejs") %>
+
+
+        <!-- Importacion de archivo CSS (Estilos) -->
+        <link rel="stylesheet" href="/css/put.css">
+    </head>
+<body>
+<%- include("partials/nav.ejs") %>
+ <main>
+        <section id="seccion-producto">
+            <h2>Producto a modificar</h2>
+            <div id="mostrar-producto"></div>
+        </section>
+        <section id="seccion-formulario">
+            <h2>Formulario de modificacion de datos</h2>
+            <form id="mostrar-formulario"></form>
+        </section>
+        <div id="mensaje"></div>
+
+    </main>
+
+<script src="/js/put.js"></script>
+
+<%- include("partials/footer.ejs") %> 

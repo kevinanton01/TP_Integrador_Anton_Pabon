@@ -47,11 +47,19 @@ const validarCampos=(req,res,next)=>{
 
 
     next();
+}
 
+// Middleware simple de proteccion de rutas
+const requireLogin = (req, res, next) => {
+    if (!req.session.user) {
+        return res.redirect("/login")
+    }
 
+    next();
 }
 
 export{
     validarId,
-    validarCampos
+    validarCampos,
+    requireLogin
 }

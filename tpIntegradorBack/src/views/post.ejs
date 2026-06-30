@@ -1,0 +1,49 @@
+<!-- Aca incluimos los fragmentos del <head> y del <header> -->
+
+<%- include("partials/head.ejs") %>
+
+
+        <!-- Importacion de archivo CSS (Estilos) -->
+        <link rel="stylesheet" href="/css/post.css">
+    </head>
+<body>
+<%- include("partials/nav.ejs") %>
+ <main>
+        <form id="formulario">
+            <div>
+                <label for="nombre" class="label">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="input">
+            </div>
+            <div>
+                <label for="imagen" class="label">Imagen</label>
+                <input type="text" id="imagen" name="imagen"class="input">
+            </div>
+
+           
+            <div>
+                <label for="categoria" class="label">Categoria</label>
+                <select name="categoria" id="categoria" >
+                    <option value="proteina" >proteina</option>
+                    <option value="creatina">creatina</option>
+                    <option value="shaker" >shaker</option>
+                </select>
+            </div>   
+            <div>
+                <label for="precio" class="label">Precio</label>
+                <input type="text" id="precio" name="precio" class="input">
+
+            </div>
+            <div>
+                <input type="submit" value="crear producto" id="submit">
+
+            </div>
+
+            
+            
+        </form>
+        <div id="mensaje"></div>
+    </main>
+
+<script src="/js/post.js"></script>
+
+<%- include("partials/footer.ejs") %> 

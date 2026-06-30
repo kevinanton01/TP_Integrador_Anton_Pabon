@@ -1,0 +1,34 @@
+<!-- Aca incluimos los fragmentos del <head> y del <header> -->
+
+<%- include("partials/head.ejs") %>
+
+
+        <!-- Importacion de archivo CSS (Estilos) -->
+        <link rel="stylesheet" href="/css/delete.css">
+    </head>
+<body>
+<%- include("partials/nav.ejs") %>
+ <main>
+        <section class="form-productos">
+            <h2>Consultar producto a eliminar: </h2>
+            
+            
+            <form id="getProduct-form">
+                <label for="idProd">Id del producto</label>
+                <input type="number" name="id" id="idProd" min="1"  required>
+
+                <input id="botonIdProd" type="submit" value="Consultar producto">
+            </form>
+
+        </section>
+
+        <hr>
+        <section id="seccion-productos">
+            
+        </section>
+
+    </main>
+
+<script src="/js/delete.js"></script>
+
+<%- include("partials/footer.ejs") %> 

@@ -26,7 +26,7 @@ function validarAdmin() {
     const password = document.getElementById("passwordAdmin");
 
     if (usuario.value === "admin" && password.value === "1234") {
-        location.href = "./pages/admin/admin.html";
+        location.href = "tpIntegradorBack/src/views/index.ejs";
     } else {
         usuario.style.border = "2px solid red";
         password.style.border = "2px solid red";
