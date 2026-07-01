@@ -85,8 +85,6 @@ function mostrarPantallaProductoModificar(){
             <input type="submit" value="Modificar Producto" id="subir-modificacion">
             </div>`;
         
-            
-
         seccionformulario.innerHTML=htmlFormulario;
         CrearEscuchadorSubmit();
 
@@ -111,7 +109,6 @@ function CrearEscuchadorSubmit(){
         objetoProducto.precio=Number(objetoProducto.precio);
         objetoProducto.activo=Number(objetoProducto.activo);
         
-        
         try {
             const response= await fetch(urlBase,{
                 method:"PUT",
@@ -135,12 +132,16 @@ function CrearEscuchadorSubmit(){
             seccionProducto.innerHTML = "";
             mostrarMensaje("exito",data.mensaje);
             localStorage.clear();
-            
-            
+              
         } catch (error) {
             console.log(error);
         }
         //window.location.href="admin.html";
     });
+}
 
+
+function cambiarDeUsuario() {
+    localStorage.clear();
+    location.href = "/login";
 }

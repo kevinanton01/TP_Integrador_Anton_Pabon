@@ -4,7 +4,6 @@ function mostrarMensaje(tipo,mensaje){
     zonaProductos.innerHTML=`<p id="mensaje-${tipo}">${mensaje}</p>`;
 }
 
-
 function crearEscuchadorBotonBorrar(id,producto){
     const boton=document.getElementById(id);
     const urlBase=`http://localhost:3000/api/productos/buscar-eliminar/${producto.id}`
@@ -68,10 +67,6 @@ async function mostrarProductos(id) {
         console.log(error);
         
     }
-
-    
-
-
 }
 
 function botonBuscarPorId(){
@@ -87,9 +82,12 @@ function botonBuscarPorId(){
             mostrarError("ingresa un ID valido");
             return;
         }
-        mostrarProductos(idProd);
-        
-
+        mostrarProductos(idProd);      
     })
 }
 botonBuscarPorId();
+
+function cambiarDeUsuario() {
+    localStorage.clear();
+    location.href = "/login";
+}

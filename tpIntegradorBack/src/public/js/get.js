@@ -1,6 +1,3 @@
-
-
-
 async function mostrarProductos(id) {
     const seccion=document.getElementById("seccion-productos");
     //optimizacion 3:guardamos la url en una variable para eviar hardcodearla
@@ -34,12 +31,6 @@ async function mostrarProductos(id) {
         console.log(error);
         mostrarError("Error de conexion con el servidor");
     }
-
-
-
-    
-
-
 }
 
 
@@ -72,3 +63,9 @@ function botonBuscarPorId(){
     })
 }
 botonBuscarPorId();
+
+
+function cambiarDeUsuario() {
+    localStorage.clear();
+    location.href = "/login";
+}

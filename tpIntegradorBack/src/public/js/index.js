@@ -105,5 +105,5 @@ function irAInicio() {
 
 function cambiarDeUsuario() {
     localStorage.clear();
-    location.href = "../../index.html";
+    location.href = "/login";
 }

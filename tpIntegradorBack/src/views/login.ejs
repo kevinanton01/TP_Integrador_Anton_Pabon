@@ -1,41 +1,53 @@
+<!-- Aca incluimos los fragmentos del <head> y del <header> -->
+
 <%- include("partials/head.ejs") %>
 
-</head>
-<h2><%= about %></h2>
+        <!-- Importacion de archivo CSS (Estilos) -->
+        <link rel="stylesheet" href="/css/login.css">
+    </head>
+<body>
+        
+<header>
+    <img id="icono-principal" src="/assets/img/logo.png" alt="Logo Proteina" />
+</header>   
 
-<!-- ====================================================
-    Enviando formularios de manera nativa con HTML
-=========================================================
+<main>
+    <div id="contenedor-formulario">
+        <h2><%= about %></h2>
 
-en action="" mandamos la url del endpoint /login
+        <!-- ====================================================
+            Enviando formularios de manera nativa con HTML
+        =========================================================
 
-en method="" determinamos si enviamos con GET o con POST la informacion
+        en action="" mandamos la url del endpoint /login
 
-Gracias al middleware
+        en method="" determinamos si enviamos con GET o con POST la informacion
 
-    app.use(express.urlencoded({
-        extended: true
-    }));
+        Gracias al middleware
 
-Nuestro endpoint recibira esta informacion (No JSON) como objetos JS
-Es decir, el middleware parseara automaticamente el tipo de info que envia el <form>
+            app.use(express.urlencoded({
+                extended: true
+            }));
 
--->
+        Nuestro endpoint recibira esta informacion (No JSON) como objetos JS
+        Es decir, el middleware parseara automaticamente el tipo de info que envia el <form>
 
-<form id="loginForm" class="form-alta" action="/login" method="POST">
+        -->
 
-    <!-- TO DO, introducir campos REGEX para validar los datos que enviamos -->
-    <label for="emailUser">Email</label>
-    <input type="email" name="email" id="emailUser" value="pepe@hola.com" required>
+        <form id="loginForm" class="form-alta" action="/login" method="POST">
 
-    <label for="passwordUser">Password</label>
-    <input type="password" name="password" id="passwordUser" value="contraseña" required>
+            <!-- TO DO, introducir campos REGEX para validar los datos que enviamos -->
+            <label for="emailUser">Email</label>
+            <input type="email" name="email" id="emailUser" value="pepe@hola.com" required>
 
-    <div>
-        <input type="submit" value="Login">
+            <label for="passwordUser">Password</label>
+            <input type="password" name="password" id="passwordUser" value="contraseña" required>
+
+            <div>
+                <input type="submit" value="Login" id="submit">
+            </div>
+        </form>
     </div>
-</form>
-
 
 <!-- Mostramos posible mensaje de error del endpoint -->
 <% if(typeof error !== "undefined") { %> 
@@ -44,6 +56,6 @@ Es decir, el middleware parseara automaticamente el tipo de info que envia el <f
 
 <% } %>
 
-
+</main>
 <!-- Nuestro footer, a falta de completarlo solo contiene los cierres del body y el html -->
 <%- include("partials/footer.ejs") %>

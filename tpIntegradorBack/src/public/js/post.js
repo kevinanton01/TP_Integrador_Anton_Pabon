@@ -81,10 +81,7 @@ function subirDatos(){
 subirDatos();
 
 
-
-
-
-
-
-
-
+function cambiarDeUsuario() {
+    localStorage.clear();
+    location.href = "/login";
+}

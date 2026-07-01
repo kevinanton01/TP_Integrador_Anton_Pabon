@@ -45,7 +45,7 @@ a {
 /* --- Estilos Main --- */
 
 body main {
-    margin-top: 180px;
+    margin-top: 15px;
     display: flex;
     justify-content: center; /* Centrado horizontal */  
 }
