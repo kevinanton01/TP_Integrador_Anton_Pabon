@@ -22,14 +22,6 @@ header {
     height: 70px;
 }
 
-.nombreUsuario{
-    color: black;
-    font-size: 18px;
-    display: flex;
-    padding-top: 20px;
-    margin-left: auto;
-}
-
 #listado-opciones {
     display: flex;
     align-items: center;
@@ -75,17 +67,21 @@ body {
     flex-direction: column;
 }
 
+#seccion-producto{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
 #contenedor-producto{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
+    align-items: center; 
 }
 
 .img-producto {
     width: 100%;
 }
-
 
 .nombre-producto {
     font-weight: bold;
@@ -109,8 +105,14 @@ body {
     font-size: 30px;
     
 }
+
 #seccion-formulario{
-    margin-left: 20px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    background-color: rgb(219, 216, 216);
+    padding: 10px;
 }
 
 #categoria,#activo{
@@ -125,12 +127,34 @@ body {
 }
 
 .input{
-    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     font-size: 25px;
 }
+
 #subir-modificacion{
-    height: 40px;
-    font-size: 30px;
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #3b82f6;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#subir-modificacion:hover{
+    background: #1f72f7;
+}
+
+#subir-modificacion:active{
+    background: #054bbd;
+}
+
+select {
+    font-size: 16px;
+    border-radius: 8px;
 }
 /* --- Estilos footer --- */
 
@@ -161,8 +185,6 @@ footer {
     text-align: center;
     
 }
-
-
 
 #mensaje-exito{
     color: green;

@@ -40,23 +40,23 @@ function mostrarPantallaProductoModificar(){
             `
         if(productoExtraido.categoria==="proteina"){
             htmlFormulario += ` <select name="categoria" id="categoria">
-                <option value="proteina" selected>proteina</option>
-                <option value="creatina">creatina</option>
-                <option value="shaker">shaker</option>
+                <option value="proteina" selected>Proteina</option>
+                <option value="creatina">Creatina</option>
+                <option value="shaker">Shaker</option>
             </select>
             </div>`;
         }else if(productoExtraido.categoria==="creatina"){
             htmlFormulario += ` <select name="categoria" id="categoria">
-                <option value="proteina">proteina</option>
-                <option value="creatina" selected>creatina</option>
-                <option value="shaker">shaker</option>
+                <option value="proteina">Proteina</option>
+                <option value="creatina" selected>Creatina</option>
+                <option value="shaker">Shaker</option>
             </select>
             </div>`;
         }else{
             htmlFormulario += ` <select name="categoria" id="categoria">
-                <option value="proteina">proteina</option>
-                <option value="creatina">creatina</option>
-                <option value="shaker" selected>shaker</option>
+                <option value="proteina">Proteina</option>
+                <option value="creatina">Creatina</option>
+                <option value="shaker" selected>Shaker</option>
             </select>
             </div>`;
         } 

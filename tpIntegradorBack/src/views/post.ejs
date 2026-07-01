@@ -2,7 +2,6 @@
 
 <%- include("partials/head.ejs") %>
 
-
         <!-- Importacion de archivo CSS (Estilos) -->
         <link rel="stylesheet" href="/css/post.css">
     </head>
@@ -11,35 +10,32 @@
  <main>
         <form id="formulario">
             <div>
-                <label for="nombre" class="label">Nombre</label>
+                <label for="nombre" class="label">Nombre: </label>
                 <input type="text" id="nombre" name="nombre" class="input">
             </div>
             <div>
-                <label for="imagen" class="label">Imagen</label>
+                <label for="imagen" class="label">Imagen: </label>
                 <input type="text" id="imagen" name="imagen"class="input">
             </div>
 
            
             <div>
-                <label for="categoria" class="label">Categoria</label>
+                <label for="categoria" class="label">Categoria: </label>
                 <select name="categoria" id="categoria" >
-                    <option value="proteina" >proteina</option>
-                    <option value="creatina">creatina</option>
-                    <option value="shaker" >shaker</option>
+                    <option value="proteina" >Proteina</option>
+                    <option value="creatina">Creatina</option>
+                    <option value="shaker" >Shaker</option>
                 </select>
             </div>   
             <div>
-                <label for="precio" class="label">Precio</label>
+                <label for="precio" class="label">Precio: </label>
                 <input type="text" id="precio" name="precio" class="input">
 
             </div>
             <div>
-                <input type="submit" value="crear producto" id="submit">
-
+                <input type="submit" value="Crear producto" id="submit">
             </div>
 
-            
-            
         </form>
         <div id="mensaje"></div>
     </main>
